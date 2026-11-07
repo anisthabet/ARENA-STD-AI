@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0D">
+<title>ARENA PULSE Studio</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>@font-face{font-family:Poppins;font-weight:800;src:url(fonts/Poppins-Bold.ttf)}@font-face{font-family:Poppins;font-weight:500;src:url(fonts/Poppins-Medium.ttf)}</style>
+<style>
+:root{--k:#0B0B0D;--s:#24252B;--r:#E53935;--w:#fff;--g:#A7A7A7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;background:var(--k);color:var(--w);font-family:Poppins,system-ui,sans-serif}
+body{padding:16px;max-width:720px;margin:0 auto}
+h1{font-size:22px;margin:0}h1 span{color:var(--r)}
+.s{color:var(--g);font-size:13px;margin:2px 0 14px}
+h2{font-size:14px;letter-spacing:2px;color:var(--g);margin:22px 0 8px}
+.pl{display:flex;gap:8px}.pl button{flex:1;background:var(--s);border:2px solid transparent;padding:12px 4px;font-size:13px}.pl button.on{border-color:var(--r);background:#33191a}
+button{background:var(--r);color:var(--w);border:0;border-radius:8px;padding:12px;font:inherit;font-weight:800;min-height:44px}
+button.g{background:var(--s)}button:disabled{opacity:.5}
+textarea,input[type=number]{width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px}
+.card{background:#16171b;border:1px solid #2b2c33;border-left:4px solid var(--r);border-radius:10px;padding:12px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:flex-start}.row>div{flex:1}
+.th{width:96px;height:96px;object-fit:cover;border-radius:8px;background:var(--s);flex:none}
+.bt{display:flex;gap:8px;margin-top:8px}.bt button{flex:1;padding:8px;font-size:13px}
+label{font-size:12px;color:var(--g)}
+.pv{background:#000;border-radius:10px;overflow:hidden;margin:0 auto;display:block}
+canvas.pv.v{width:min(100%,340px)}canvas.pv.h{width:100%}.tabs{display:flex;gap:8px;margin-bottom:6px}.tabs button{flex:1}
+video{width:100%;max-width:100%;border-radius:10px;margin-top:10px}
+input[type=range]{width:100%;accent-color:var(--r)}
+.n{color:var(--g);font-size:13px;margin:8px 0}
+.big{width:100%;margin-top:10px}
+ label{display:block} select{width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:12px;font:inherit;font-size:15px;margin:4px 0 12px} #f input,#f textarea{margin:4px 0 12px} img#o{width:100%;border-radius:8px;margin-top:14px;display:block} #sv,#b{width:100%;margin-top:8px}@media(min-width:760px){body.wide{max-width:1240px}.vg{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;align-items:start}.vr{position:sticky;top:12px}.vr h2:first-child{margin-top:0}}
+</style>
+</head>
+<body>
+<h1>ARENA <span>PULSE</span> Studio</h1>
+<p class="s">Posts and news videos for TikTok, Facebook and YouTube.</p>
+<div class="tabs"><button id="tp">Posts</button><button id="tv" class="g">Video</button></div>
+<section id="sp">
+<h2>POST TEMPLATE</h2>
+<select id="t"></select>
+<div id="f"></div>
+<button id="b">Make image</button>
+<canvas id="c" hidden></canvas>
+<img id="o" alt="" hidden>
+<video id="v" hidden></video>
+<button id="sv" hidden>Save</button>
+<p class="n" id="n"></p>
+</section>
+<section id="sv2" hidden>
+<div class="vg"><div class="vl">
+<h2>1. FORMAT</h2>
+<div class="pl" id="vpl"></div>
+<h2>2. NEWS SLIDES</h2>
+<div id="vsl"></div>
+<button class="g big" id="vadd">+ Add slide</button>
+<h2>3. INTRO, CLOSER AND LABEL</h2>
+<label><input type="checkbox" id="vin" checked style="width:auto;margin-right:8px">Logo intro at the start</label><br>
+<label><input type="checkbox" id="vout" checked style="width:auto;margin-right:8px">Closer at the end</label>
+<label style="margin-top:8px">CLOSER WORD (FOLLOW, SUBSCRIBE...)</label>
+<input type="text" id="vcl" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
+<label>RED TAG ABOVE THE TEXT (instead of PULSE NEWS)</label>
+<input type="text" id="vtag" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px">
+<h2>4. TICKER (BOTTOM)</h2>
+<label>TICKER WORD (instead of NEWS)</label>
+<input type="text" id="vlab" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
+<label>TICKER CONTENT (one line per item)</label>
+<textarea id="vtk" rows="4"></textarea>
+</div><div class="vr">
+<h2>PREVIEW</h2>
+<canvas id="vc" class="pv v"></canvas>
+<input type="range" id="vsk" min="0" max="1000" value="0">
+<label style="margin-top:8px"><input type="checkbox" id="vsnd" checked style="width:auto;margin-right:8px">Sound effects</label>
+<div class="bt"><button id="vpp" class="g">Play preview</button></div>
+<h2>GENERATE</h2>
+<button class="big" id="vgen">Generate video</button>
+<p class="n" id="vn"></p>
+<video id="vv" controls playsinline hidden></video>
+<button class="big" id="vsv" hidden>Save video</button>
+</div></div>
+</section>
+<script>
+var K='#0B0B0D',R='#E53935',W='#fff',G='#A7A7A7',S='#24252B';
+var C=document.getElementById('c'),PX=C.getContext('2d'),X=PX,VC=document.getElementById('vc'),VX=VC.getContext('2d');
+function F(s,w){X.font=(w||800)+' '+s+'px Poppins,sans-serif'}
+function T(t,x,y,s,c,a,mw,w){F(s,w);if(mw)while(X.measureText(t).width>mw&&s>16){s-=2;F(s,w)}X.fillStyle=c;X.textAlign=a||'left';X.textBaseline='middle';X.fillText(t,x,y)}
+function Q(x,y,w,h,c){X.fillStyle=c;X.fillRect(x,y,w,h)}
+function wrap(t,s,mw,w){F(s,w);var L=[],l='';t.split(' ').forEach(function(d){var n=l?l+' '+d:d;if(X.measureText(n).width>mw&&l){L.push(l);l=d}else l=n});L.push(l);return L}
+function path(p){p.forEach(function(q,i){i?X.lineTo(q[0],q[1]):X.moveTo(q[0],q[1])})}
+function sym(x,y,s){var k=s/100;X.save();X.translate(x,y);X.scale(k,k);X.fillStyle=W;X.beginPath();path([[50,12],[88,88],[68,88],[50,50],[32,88],[12,88]]);X.fill();X.lineJoin=X.lineCap='round';X.beginPath();path([[20,68],[40,68],[47,54],[55,78],[60,68],[80,68]]);X.strokeStyle=K;X.lineWidth=10;X.stroke();X.strokeStyle=R;X.lineWidth=5;X.stroke();X.restore()}
+function lines(s){return s.split('\n').map(function(x){return x.trim()}).filter(Boolean)}
+function head(tag,sport,h){C.width=1080;C.height=h;Q(0,0,1080,h,K);sym(72,55,100);T('ARENA PULSE',190,105,38,W);
+ var s='ARENA '+sport;F(24,500);var w=X.measureText(s).width+34;X.strokeStyle=R;X.lineWidth=3;X.strokeRect(1008-w,80,w,50);T(s,1008-w/2,105,24,W,'center',0,500);
+ F(30);var tw=X.measureText(tag).width+56;Q(72,175,tw,60,R);T(tag,72+tw/2,205,30,W,'center')}
+function foot(y,src){if(src)T(src,72,y-50,22,G,'left',936,500);Q(72,y-20,936,6,R);T('FOLLOW ARENA PULSE',540,y+25,34,W,'center');T('EVERY SPORT. EVERY STORY.',540,y+63,22,G,'center',0,500)}
+function rowp(l,re){var m=l.match(re);return m}
+var bg=null,vb=null,vext='webm',photos=[],LT=0,L={hs:0,as:0,t:0,run:false};
+var D={
+'Match Day post':{f:[['comp','Competition','PREMIER LEAGUE'],['date','Date','SATURDAY 7 NOVEMBER'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED'],['time','Kick-off time','4:00 PM']],
+ d:function(v){head('MATCH DAY','FOOTBALL',1350);T(v.comp,72,310,64,W,'left',936);T(v.date,72,375,30,G,'left',936,500);
+  Q(72,450,936,200,S);Q(72,450,14,200,R);T(v.home,540,550,84,W,'center',860);Q(72,790,936,200,S);Q(72,790,14,200,R);T(v.away,540,890,84,W,'center',860);
+  X.fillStyle=R;X.beginPath();X.arc(540,720,50,0,7);X.fill();T('VS',540,720,40,W,'center');
+  Q(72,1030,936,120,R);T(v.time,540,1092,86,W,'center');T('KICK-OFF  •  CET',540,1185,26,G,'center',0,500);foot(1280)}},
+'Match day list':{f:[['title','Title','MATCH DAY'],['date','Date','SATURDAY 7 NOVEMBER'],['rows','One match per line: TIME|HOME|AWAY|COMPETITION (up to 10)','1:30 PM|Leeds United|Tottenham|Premier League\n4:00 PM|Arsenal|Hull City|Premier League\n9:00 PM|Atletico Madrid|Bayern Munich|Champions League','area']],
+ d:function(v){head('MATCH DAY','FOOTBALL',1920);T(v.title,72,300,46,W,'left',936);T(v.date,72,350,26,G,'left',936,500);
+  lines(v.rows).slice(0,10).forEach(function(l,i){var p=l.split('|'),y=430+i*134;Q(72,y,936,122,S);Q(72,y,200,122,R);T(p[0]||'',172,y+61,36,W,'center',180);T((p[3]||'').toUpperCase(),300,y+22,22,R,'left',680);T((p[1]||'').toUpperCase(),300,y+58,32,W,'left',680);T((p[2]||'').toUpperCase(),300,y+98,32,W,'left',680)});foot(1825,'ALL TIMES: CET')}},
+'Live scoreboard':{live:true,f:[['comp','Competition','PREMIER LEAGUE'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED']],
+ d:function(v){head('LIVE','FOOTBALL',1350);T(v.comp,72,310,52,W,'left',936);T(v.home.toUpperCase(),270,560,44,W,'center',400);T(v.away.toUpperCase(),810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
+  var m=Math.floor(v.t/60),c=(m<10?'0':'')+m+':'+(v.t%60<10?'0':'')+(v.t%60);T(c,540,790,90,R,'center');T('MATCH CLOCK',540,860,24,G,'center',0,500);foot(1290,'SCORES ENTERED BY ARENA PULSE')}},
+
+'Half time / Full time':{f:[['stage','Stage','FULL TIME'],['comp','Competition','CHAMPIONS LEAGUE'],['home','Home team','BARCELONA'],['away','Away team','ASTON VILLA'],['hs','Home score','3'],['as','Away score','0'],['hg','Home scorers (one per line)','Player name 12\u2019\nPlayer name 55\u2019','area'],['ag','Away scorers (one per line)','','area']],
+ d:function(v){head(v.stage.toUpperCase(),'FOOTBALL',1350);T(v.comp,72,310,52,W,'left',936);
+  T(v.home,270,560,44,W,'center',400);T(v.away,810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
+  Q(72,740,936,6,S);lines(v.hg).slice(0,6).forEach(function(l,i){T(l,72,790+i*52,30,W,'left',440,500)});lines(v.ag).slice(0,6).forEach(function(l,i){T(l,568,790+i*52,30,W,'left',440,500)});foot(1290,'SOURCE: ')}},
+'Results post':{f:[['title','Title','CHAMPIONS LEAGUE RESULTS'],['date','Date','TUESDAY 3 NOVEMBER'],['rows','One result per line (Team 2-1 Team)','Barcelona 3-0 Aston Villa\nAtletico Madrid 0-2 Bayern Munich\nVillarreal 0-6 Paris Saint-Germain\nManchester United 3-2 AS Roma','area']],
+ d:function(v){head('FULL TIME','FOOTBALL',1350);T(v.title,72,300,50,W,'left',936);T(v.date,72,350,26,G,'left',936,500);
+  var L=lines(v.rows).slice(0,9),n=L.length||1,h=Math.min(86,(790/n)-8),y=395;
+  L.forEach(function(l){var m=l.match(/^(.*?)\s+(\d+)\s*[-–:]\s*(\d+)\s+(.*)$/)||[0,l,'-','-',''];Q(72,y,936,h,S);Q(72,y,12,h,R);
+   T(m[1].toUpperCase(),455,y+h/2,30,W,'right',340);T(m[4].toUpperCase(),625,y+h/2,30,W,'left',340);Q(475,y+8,130,h-16,R);T(m[2]+' - '+m[3],540,y+h/2,36,W,'center');y+=h+8});
+  foot(1290,'SOURCE: ')}},
+'Standings table':{f:[['title','Title','CHAMPIONS LEAGUE STANDINGS'],['sub','Subtitle','AFTER MATCHDAY 4'],['rows','Team W D L Pts (one per line, up to 18)','Paris Saint-Germain 3 0 0 9\nAston Villa 3 0 0 9\nLiverpool 3 0 0 9\nReal Madrid 3 0 0 9\nReal Betis 3 0 0 9\nVfB Stuttgart 2 1 0 7','area']],
+ d:function(v){head('STANDINGS','FOOTBALL',1920);T(v.title,72,300,46,W,'left',936);T(v.sub,72,350,26,G,'left',936,500);
+  [[655,'W'],[730,'D'],[805,'L']].forEach(function(q){T(q[1],q[0],405,24,G,'center',0,500)});T('PTS',990,405,24,G,'right',0,500);
+  lines(v.rows).slice(0,18).forEach(function(l,i){var m=l.match(/^(.*?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)||[0,l,'','','',''],y=430+i*72;
+   Q(72,y,936,66,S);Q(72,y,70,66,R);T(String(i+1),107,y+33,34,W,'center');T(m[1].toUpperCase(),165,y+33,32,W,'left',460);
+   [[655,2],[730,3],[805,4]].forEach(function(q){T(m[q[1]],q[0],y+33,30,G,'center',0,500)});T(m[5],985,y+33,36,W,'right')});foot(1825,'SOURCE: ')}},
+'Lineups':{f:[['title','Title','STARTING LINEUPS'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED'],['hform','Home formation','4-2-3-1'],['aform','Away formation','4-3-3'],['hl','Home XI (one per line: number name)','1 Goalkeeper\n2 Player\n3 Player\n4 Player\n5 Player\n6 Player\n7 Player\n8 Player\n9 Player\n10 Player\n11 Player','area'],['al','Away XI (one per line: number name)','1 Goalkeeper\n2 Player\n3 Player\n4 Player\n5 Player\n6 Player\n7 Player\n8 Player\n9 Player\n10 Player\n11 Player','area']],
+ d:function(v){head('LINEUPS','FOOTBALL',1350);T(v.title,72,300,50,W,'left',936);
+  [[72,v.home,v.hform,v.hl],[550,v.away,v.aform,v.al]].forEach(function(c){var x=c[0];Q(x,350,458,70,R);T(c[1].toUpperCase(),x+20,385,28,W,'left',300);T(c[2],x+438,385,26,W,'right',0,500);
+   lines(c[3]).slice(0,11).forEach(function(l,i){var m=l.match(/^(\d+)\s+(.*)$/)||[0,String(i+1),l],y=432+i*62;Q(x,y,458,56,S);Q(x,y,56,56,R);T(m[1],x+28,y+28,26,W,'center');T(m[2].toUpperCase(),x+74,y+28,26,W,'left',370)})});foot(1290,'SOURCE: ')}},
+'News post':{f:[['sport','Sport','FOOTBALL'],['head','Headline','CAF AWARDS 2026: 10 NOMINEES FOR PLAYER OF THE YEAR'],['body','Short text','The shortlist is out. Who deserves to win?'],['src','Source','SOURCE: CAF']],
+ d:function(v){head('PULSE NEWS',v.sport.toUpperCase(),1350);var s=100,L;while((L=wrap(v.head.toUpperCase(),s,936)).length>4&&s>40)s-=4;
+  L.forEach(function(l,i){T(l,72,340+i*(s*1.2),s,i==1?R:W,'left',936)});
+  wrap(v.body,38,936,500).slice(0,4).forEach(function(l,i){T(l,72,880+i*56,38,W,'left',936,500)});foot(1290,v.src)}},
+'Facts post':{f:[['sport','Sport','BASKETBALL'],['num','Big number','7.24 M'],['title','Title','NBA THREE-POINT LINE'],['line','One line','23 ft 9 in from the basket at the top of the arc.'],['src','Source','SOURCE: NBA OFFICIAL RULES']],
+ d:function(v){head('PULSE FACTS',v.sport.toUpperCase(),1350);T(v.num,72,540,300,R,'left',936);T(v.title.toUpperCase(),72,810,70,W,'left',936);
+  wrap(v.line,36,936,500).slice(0,3).forEach(function(l,i){T(l,72,900+i*54,36,G,'left',936,500)});foot(1290,v.src)}},
+'YouTube thumbnail':{f:[['tag','Tag','MATCH DAY'],['home','Home team','NOTTINGHAM FOREST'],['away','Away team','MANCHESTER CITY'],['day','Day','SATURDAY'],['time','Time','6:30'],['ap','AM / PM + zone','PM  CET'],['bot','Bottom line','PREMIER LEAGUE  •  7 NOVEMBER']],
+ d:function(v){C.width=1280;C.height=720;Q(0,0,1280,720,K);sym(50,36,80);T('ARENA PULSE',145,76,30,W);var w=(F(28),X.measureText(v.tag).width+48);Q(1230-w,40,w,60,R);T(v.tag,1230-w/2,70,28,W,'center');
+  Q(60,560,1160,6,R);Q(870,190,360,330,R);T(v.home,60,300,100,W,'left',780);T('VS',60,390,48,R);T(v.away,60,475,100,W,'left',780);
+  T(v.day,1050,250,40,W,'center',320);T(v.time,1050,360,130,W,'center',320);T(v.ap,1050,450,40,W,'center',320);T(v.bot,60,625,34,G,'left',1100,500)}}
+};
+var sel=document.getElementById('t'),box=document.getElementById('f'),img=document.getElementById('o'),vid=document.getElementById('v'),sv=document.getElementById('sv'),mb=document.getElementById('b'),nt=document.getElementById('n');
+Object.keys(D).forEach(function(k){var o=document.createElement('option');o.textContent=k;sel.appendChild(o)});
+function note(s){nt.textContent=s}
+function build(){clearInterval(LT);L={hs:0,as:0,t:0,run:false};mb.hidden=!!D[sel.value].live;box.innerHTML='';mb.textContent='Make image';img.hidden=vid.hidden=sv.hidden=C.hidden=true;note('');
+ D[sel.value].f.forEach(function(q){var l=document.createElement('label');l.textContent=q[1].toUpperCase();var i;
+  if(q[3]=='sel'){i=document.createElement('select');q[4].forEach(function(z){var o=document.createElement('option');o.textContent=z;i.appendChild(o)})}
+  else if(q[3]=='files'){i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=true;i.onchange=function(){photos=[];Array.prototype.forEach.call(i.files,function(fl,k){var im=new Image();im.onload=function(){photos[k]=im};im.src=URL.createObjectURL(fl)});note(i.files.length+' photo(s) selected.')}}
+  else if(q[3]=='file'){i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=function(){var fl=i.files[0];if(!fl)return;var im=new Image();im.onload=function(){bg=im};im.src=URL.createObjectURL(fl)}}
+  else{i=document.createElement(q[3]?'textarea':'input');if(q[3])i.rows=5;i.value=q[2]}
+  i.id='i_'+q[0];box.appendChild(l);box.appendChild(i)});if(D[sel.value].live)liveUI()}
+function vals(){var v={};D[sel.value].f.forEach(function(q){v[q[0]]=document.getElementById('i_'+q[0]).value});return v}
+var DL=null;try{claude.use('downloads').then(function(d){DL=d}).catch(function(){})}catch(e){}
+var cur=null;
+sv.onclick=function(){if(!cur)return;if(!DL){note('Press and hold the picture or video, then choose Save.');return}
+ DL.save({filename:cur.name,data:cur.blob}).then(function(){note('Saved.')}).catch(function(e){note(e&&e.code=='declined'?'Not saved.':'Saving is not available here. Press and hold the picture to save it.')})};
+function ready(){return Promise.all([document.fonts.load('800 40px Poppins'),document.fonts.load('500 40px Poppins')]).catch(function(){})}
+function makeImage(){var v=vals();ready().then(function(){X=PX;D[sel.value].d(v);C.toBlob(function(b){cur={blob:b,name:'arena-pulse-'+sel.value.toLowerCase().replace(/[^a-z]+/g,'-')+'.png'};img.src=URL.createObjectURL(b);img.hidden=false;sv.textContent='Save image';sv.hidden=false;note('Done. Tap Save image.')},'image/png')})}
+function liveDraw(){var v=vals();v.hs=L.hs;v.as=L.as;v.t=L.t;ready().then(function(){X=PX;D[sel.value].d(v);C.hidden=false;img.hidden=true})}
+function btn(t,f){var b=document.createElement('button');b.textContent=t;b.onclick=f;box.appendChild(b);return b}
+function liveUI(){var g=btn('Home goal +1',function(){L.hs++;liveDraw()});btn('Away goal +1',function(){L.as++;liveDraw()});btn('Goal removed: home -1',function(){L.hs=Math.max(0,L.hs-1);liveDraw()});btn('Goal removed: away -1',function(){L.as=Math.max(0,L.as-1);liveDraw()});
+ var c=btn('Start clock',function(){L.run=!L.run;c.textContent=L.run?'Pause clock':'Start clock'});btn('Reset all',function(){L={hs:0,as:0,t:0,run:false};c.textContent='Start clock';liveDraw()});
+ btn('Save current score image',function(){liveDraw();setTimeout(function(){C.toBlob(function(b){cur={blob:b,name:'arena-pulse-live-score.png'};sv.hidden=false;sv.textContent='Save image';sv.onclick()},'image/png')},200)});
+ Array.prototype.forEach.call(box.querySelectorAll('input'),function(i){i.oninput=liveDraw});LT=setInterval(function(){if(L.run){L.t++;liveDraw()}},1000);liveDraw()}
+sel.onchange=build;mb.onclick=makeImage;build();
+
+var $=function(i){return document.getElementById(i)};
+var DCx=null,VP='tiktok',VW=1080,VH=1920,SC=2/3,vcur=0,play=0,raf=0,curAu=null,vout=null,tkW=0,tkT='';
+var PL=[['tiktok','TikTok 9:16'],['facebook','Facebook 9:16'],['youtube','YouTube 16:9']];
+var slides=[{img:null,url:'',title:'FULL TIME',text:'Barcelona 3-0 Aston Villa in the Champions League.',dur:5},{img:null,url:'',title:'PSG WIN 6-0',text:'Paris Saint-Germain win 6-0 away at Villarreal.',dur:5}];
+$('vtk').value='BARCELONA 3-0 ASTON VILLA\nVILLARREAL 0-6 PARIS SAINT-GERMAIN\nATLETICO MADRID 0-2 BAYERN MUNICH\nMANCHESTER UNITED 3-2 AS ROMA\nFEYENOORD 0-3 INTER';
+$('vlab').value='RESULTS';$('vcl').value='FOLLOW';$('vtag').value='PULSE NEWS';
+function rr(x,y,w,h,r){X.beginPath();X.moveTo(x+r,y);X.arcTo(x+w,y,x+w,y+h,r);X.arcTo(x+w,y+h,x,y+h,r);X.arcTo(x,y+h,x,y,r);X.arcTo(x,y,x+w,y,r);X.closePath()}
+function cl(x){return Math.max(0,Math.min(1,x))}
+function E(x){x=cl(x);return 1-Math.pow(1-x,3)}
+function EB(x){x=cl(x);var c=1.25,d=c+1;return 1+d*Math.pow(x-1,3)+c*Math.pow(x-1,2)}
+var memo={};function fit(t,w,h,mx,mn){var k=t+w+h;if(memo[k])return memo[k];var s=mx,L;for(;s>=mn;s-=4){L=wrap(t,s,w);if(L.length*s*1.2<=h)break}return memo[k]={L:L,s:Math.max(s,mn)}}
+var pts=[];for(var pi=0;pi<40;pi++){var q=Math.sin(pi*91.7)*43758.5;pts.push({x:(q-Math.floor(q)),y:((q*7)%1+1)%1,v:20+((q*13)%1+1)%1*50,r:2+((q*3)%1+1)%1*5,a:.12+((q*5)%1+1)%1*.3})}
+function fit2(t,w,h,mx,mn,wt){var k=t+'|'+w+'|'+Math.round(h)+'|'+wt;if(memo[k])return memo[k];var s=mx,L;for(;s>=mn;s-=2){L=wrap(t,s,w,wt);if(L.length*s*1.22<=h)break}return memo[k]={L:L,s:Math.max(s,mn)}}
+function partial(a,f){var L=[],tot=0,i;for(i=0;i<a.length-1;i++){var d=Math.hypot(a[i+1][0]-a[i][0],a[i+1][1]-a[i][1]);L.push(d);tot+=d}var m=tot*f,o=[a[0]],acc=0;for(i=0;i<L.length;i++){if(acc+L[i]<=m){o.push(a[i+1]);acc+=L[i]}else{var r=(m-acc)/L[i];o.push([a[i][0]+(a[i+1][0]-a[i][0])*r,a[i][1]+(a[i+1][1]-a[i][1])*r]);break}}return o}
+function IN(){return $('vin')&&$('vin').checked?2.2:0}
+function OUT(){return $('vout')&&$('vout').checked?3.8:0}
+function stot(){return slides.reduce(function(a,s){return a+Math.max(2,+s.dur||5)},0)}
+function total(){return IN()+stot()+OUT()}
+function bgd(t){var g=X.createLinearGradient(0,0,0,VH);g.addColorStop(0,'#0B0B0D');g.addColorStop(1,'#181a21');X.fillStyle=g;X.fillRect(0,0,VW,VH);
+ X.fillStyle='rgba(255,255,255,.028)';var off=(t*55)%240;for(var k=-6;k<14;k++){var x=k*240+off;X.beginPath();path([[x,0],[x+100,0],[x+100-VH*.35,VH],[x-VH*.35,VH]]);X.fill()}
+ X.save();X.translate(VW/2,VH*.5);var z=1+.03*Math.sin(t*1.4);X.scale(z,z);X.strokeStyle='rgba(255,255,255,.07)';X.lineWidth=6;X.beginPath();X.arc(0,0,300,0,7);X.stroke();X.beginPath();X.moveTo(-VW,0);X.lineTo(VW,0);X.stroke();X.beginPath();X.arc(0,0,520,0,7);X.stroke();X.restore();
+ var rg=X.createRadialGradient(VW/2,VH*.38,0,VW/2,VH*.38,VW*.7);rg.addColorStop(0,'rgba(229,57,53,'+(.32+.1*Math.sin(t*2))+')');rg.addColorStop(1,'rgba(229,57,53,0)');X.fillStyle=rg;X.fillRect(0,0,VW,VH);
+ pts.forEach(function(p){var y=((p.y*VH-t*p.v)%VH+VH)%VH,x=p.x*VW+Math.sin(t+p.r)*20;X.fillStyle='rgba(229,57,53,'+p.a+')';X.beginPath();X.arc(x,y,p.r,0,7);X.fill()})}
+function intro(t,vert){var a=1-E((t-1.9)/.3),cy=VH/2-60,fs=vert?150:130;X.globalAlpha=a;
+ var e=[[0,0],[VW*.37,0],[VW*.42,0],[VW*.455,-90],[VW*.5,90],[VW*.53,0],[VW*.58,0],[VW,0]].map(function(p){return[p[0],cy+p[1]]});
+ var pp=partial(e,E(t/.8));if(pp.length>1){X.strokeStyle=R;X.lineWidth=9;X.lineJoin=X.lineCap='round';X.beginPath();path(pp);X.stroke()}
+ var s=300*EB((t-.35)/.5);if(s>1)sym(VW/2-s/2,cy-s/2-190,s);
+ X.globalAlpha=a*E((t-1)/.4);T('ARENA',VW/2,cy+150,fs,W,'center');X.globalAlpha=a*E((t-1.2)/.4);T('PULSE',VW/2,cy+150+fs*1.07,fs,R,'center');
+ X.globalAlpha=a*E((t-1.7)/.4);T('EVERY SPORT. EVERY STORY.',VW/2,cy+150+fs*1.07+90,30,G,'center',0,500);X.globalAlpha=1}
+function closer(t,vert){var tx=vert?VW/2:700,al=vert?'center':'left',s=300*EB((t-.2)/.5);
+ if(s>1){if(vert)sym(VW/2-s/2,VH*.34-s/2,s);else sym(410-s/2,VH/2-s/2,s)}
+ X.globalAlpha=E((t-.6)/.4);T('THANKS FOR WATCHING',tx,vert?VH*.5:VH*.38,vert?62:76,W,al,vert?900:1000);X.globalAlpha=1;
+ var by=vert?VH*.54:VH*.45,bh=140,bx=vert?100:700,bw=vert?880:1060,w=bw*E((t-1)/.45);if(w>0)Q(bx,by,w,bh,R);
+ X.globalAlpha=E((t-1.25)/.3);T(($('vcl').value||'FOLLOW').toUpperCase(),bx+bw/2,by+bh/2+4,92,W,'center',bw-60);
+ X.globalAlpha=E((t-1.7)/.4);T('ARENA PULSE',tx,by+bh+(vert?100:80),56,W,al);X.globalAlpha=E((t-2.1)/.4);T('EVERY SPORT. EVERY STORY.',tx,by+bh+(vert?170:150),30,G,al,0,500);X.globalAlpha=1}
+function frame(t){X=VX;X.setTransform(SC,0,0,SC,0,0);var vert=VP!='youtube',tot=total();bgd(t);
+ if(t<IN())intro(t,vert);else if(t>=IN()+stot())closer(t-IN()-stot(),vert);else{
+  var tt=t-IN(),n=slides.length,s0=0,i=0;for(;i<n-1;i++){var dd=Math.max(2,+slides[i].dur||5);if(tt<s0+dd)break;s0+=dd}
+  var sl=slides[i],d=Math.max(2,+sl.dur||5),u=tt-s0,ee=E((u-(d-.6))/.6);
+  var ix=vert?60:960,iy=190,iw=vert?960:880,ih=vert?860:740,yy=iy-(iy+ih+60)*(1-EB(u/.9))-(iy+ih+60)*ee;
+  X.save();X.shadowColor='rgba(0,0,0,.65)';X.shadowBlur=40;X.fillStyle=S;rr(ix,yy,iw,ih,24);X.fill();X.restore();
+  X.save();rr(ix,yy,iw,ih,24);X.clip();if(sl.img){var z=1+.05*u/d,r=Math.max(iw/sl.img.width,ih/sl.img.height)*z,w=sl.img.width*r,h=sl.img.height*r;X.drawImage(sl.img,ix+(iw-w)/2,yy+(ih-h)/2,w,h)}else{sym(ix+iw/2-70,yy+ih/2-110,140);T('ADD IMAGE',ix+iw/2,yy+ih/2+80,34,G,'center')}
+  var sh=X.createLinearGradient(0,yy+ih*.6,0,yy+ih);sh.addColorStop(0,'rgba(0,0,0,0)');sh.addColorStop(1,'rgba(0,0,0,.5)');X.fillStyle=sh;X.fillRect(ix,yy,iw,ih);X.restore();
+  X.strokeStyle=R;X.lineWidth=6;rr(ix,yy,iw,ih,24);X.stroke();Q(ix+30,yy+ih-14,200,14,R);
+  var tx=vert?60:80,ty=vert?1100:190,tw_=vert?960:800,th=vert?640:740,p0=E((u-.95)/.6),a0=p0*(1-ee);
+  if(a0>0){X.globalAlpha=a0;X.save();X.translate(vert?0:-80*(1-p0),vert?60*(1-p0):0);var tg=($('vtag').value||'PULSE NEWS').toUpperCase();F(30);var tgw=Math.max(250,X.measureText(tg).width+60);Q(tx,ty,tgw,56,R);T(tg,tx+tgw/2,ty+28,30,W,'center');Q(tx,ty+56,tw_,th-56,S);Q(tx,ty+56,14,th-56,R);
+   var iw2=tw_-90,ih2=th-56-60,ttl=(sl.title||'').trim(),y0=ty+56+30,hT=0,k0=0;
+   if(ttl){var ft=fit2(ttl.toUpperCase(),iw2,ih2*.45,vert?58:56,30,800),lh=ft.s*1.2;hT=ft.L.length*lh+22;ft.L.forEach(function(l,k){var a=E((u-1.05-k*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+k*lh+lh/2+14*(1-a),ft.s,W,'left',0,800)});k0=ft.L.length}
+   var fb=fit2(sl.text||'',iw2,ih2-hT,ttl?(vert?44:42):(vert?56:54),24,500),lb=fb.s*1.25;
+   fb.L.forEach(function(l,k){var a=E((u-1.05-(k0+k)*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+hT+k*lb+lb/2+14*(1-a),fb.s,ttl?'#E8E8EA':W,'left',0,500)});
+   X.restore();X.globalAlpha=1}
+  var lab=($('vlab').value||'NEWS').toUpperCase(),ls=$('vtk').value.split('\n').map(function(x){return x.trim()}).filter(Boolean),tk=(ls.length?ls.join('   •   '):'ARENA PULSE')+'   •   ';
+  var ky=vert?1760:960;F(26);var lw=X.measureText(lab).width+70;if(tk!=tkT){tkT=tk;F(30,500);tkW=X.measureText(tk).width}
+  Q(0,ky,VW,72,'rgba(11,11,13,.95)');Q(0,ky,VW,4,R);X.save();X.beginPath();X.rect(lw,ky,VW-lw,72);X.clip();var o=(t*150)%tkW;for(var k=0;k<5;k++)T(tk,lw+20-o+k*tkW,ky+38,30,W,'left',0,500);X.restore();Q(0,ky+4,lw,68,R);T(lab,lw/2,ky+38,26,W,'center');
+  var ba=E((t-IN())/.6);X.globalAlpha=ba;Q(40,60,340,100,'rgba(11,11,13,.92)');Q(40,154,340,6,R);sym(54,70,74);T('ARENA PULSE',140,107,30,W);X.globalAlpha=1;
+  T('ARENA PULSE  •  EVERY SPORT. EVERY STORY.',vert?540:80,vert?1868:1052,24,G,vert?'center':'left',0,500)}
+ Q(0,VH-10,VW*cl(t/tot),10,R);X=PX}
+function vsize(){var v=VP!='youtube';VW=v?1080:1920;VH=v?1920:1080;VC.width=Math.round(VW*SC);VC.height=Math.round(VH*SC);VC.className='pv '+(v?'v':'h');frame(vcur*total())}
+function sched(ac,dst,b){
+ function tone(f0,f1,t,d,p,ty){var o=ac.createOscillator(),g=ac.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(p,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(dst);o.start(t);o.stop(t+d+.05)}
+ function noise(t,d,f0,f1,p){var n=Math.ceil(ac.sampleRate*d),bf=ac.createBuffer(1,n,ac.sampleRate),a=bf.getChannelData(0);for(var i=0;i<n;i++)a[i]=Math.random()*2-1;var s=ac.createBufferSource();s.buffer=bf;var f=ac.createBiquadFilter();f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);var g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(p,t+d*.4);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(dst);s.start(t)}
+ if(IN()){tone(70,40,b+.15,.3,.9);tone(60,35,b+.3,.3,.7);tone(300,1000,b+.4,.18,.25);tone(55,30,b+1,.5,.9);noise(b+.95,.15,2500,2500,.5);tone(1760,1760,b+1.6,.7,.08,'triangle')}
+ var s0=0;slides.forEach(function(s){var d=Math.max(2,+s.dur||5),t=b+IN()+s0;noise(t-.05,.5,300,3500,.6);tone(60,38,t+.8,.35,.9);noise(t+.78,.1,2000,2000,.4);tone(1320,1320,t+.98,.3,.12,'triangle');for(var k=0;k<3;k++)tone(1760+k*220,1760+k*220,t+1.08+k*.14,.1,.06,'triangle');noise(t+d-.6,.4,3000,300,.4);s0+=d});if(OUT()){var c=b+IN()+s0;tone(300,1000,c+.2,.18,.25);tone(1320,1320,c+.6,.3,.12,'triangle');noise(c+.95,.5,300,3500,.6);tone(60,38,c+1.25,.4,.9);noise(c+1.23,.1,2000,2000,.4);[1320,1760,1980].forEach(function(f,k){tone(f,f,c+1.8+k*.4,.35,.12,'triangle')});tone(1760,1760,c+3,.7,.08,'triangle')}}
+function audio(forRec){var hs=slides.some(function(x){return x.sbuf});if(!$('vsnd').checked&&!hs)return null;
+ try{var ac=new (window.AudioContext||window.webkitAudioContext)(),m=ac.createGain();m.gain.value=.8;var de=null;if(forRec){de=ac.createMediaStreamDestination();m.connect(de)}else m.connect(ac.destination);ac.resume();var b0=ac.currentTime+.15;
+  if($('vsnd').checked)sched(ac,m,b0);var s0=0;
+  slides.forEach(function(x){var d=Math.max(2,+x.dur||5),st=b0+IN()+s0;if(x.sbuf){var so=ac.createBufferSource(),g=ac.createGain();so.buffer=x.sbuf;g.gain.setValueAtTime(1,st+d-.3);g.gain.linearRampToValueAtTime(0,st+d);so.connect(g);g.connect(m);so.start(st);so.stop(st+d)}s0+=d});
+  return{ac:ac,track:de?de.stream.getAudioTracks()[0]:null}}catch(e){return null}}
+function vnote(s){$('vn').textContent=s}
+function buildPl(){$('vpl').innerHTML='';PL.forEach(function(p){var b=document.createElement('button');b.textContent=p[1];b.className=p[0]==VP?'on':'g';b.onclick=function(){VP=p[0];$('vcl').value=VP=='youtube'?'SUBSCRIBE':'FOLLOW';buildPl();vsize()};$('vpl').appendChild(b)})}
+function buildSl(){var h=$('vsl');h.innerHTML='';slides.forEach(function(s,i){var c=document.createElement('div');c.className='card';
+ c.innerHTML='<div class="row"><img class="th" alt=""><div><label>SLIDE '+(i+1)+' TITLE (bold)</label><input type="text" class="ti" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><label>MAIN TEXT</label><textarea rows="3"></textarea></div></div><div class="row" style="margin-top:8px"><div><label>IMAGE</label><input type="file" accept="image/*"></div><div><label>SECONDS</label><input type="number" min="2" max="20"></div></div><div style="margin-top:8px"><label>SOUND FOR THIS SLIDE (optional)</label><input type="file" accept="audio/*" class="sf"><div class="bt"><button class="g ms">Match seconds to sound</button><button class="g rs">Remove sound</button></div><div class="n sn"></div></div><div class="bt"><button class="g u">Up</button><button class="g dn">Down</button><button class="g de">Delete</button></div>';
+ var th=c.querySelector('.th');if(s.url)th.src=s.url;var ti=c.querySelector('.ti');ti.value=s.title||'';ti.oninput=function(){s.title=ti.value;frame(vcur*total())};var ta=c.querySelector('textarea');ta.value=s.text;ta.oninput=function(){s.text=ta.value;frame(vcur*total())};
+ var nm=c.querySelector('input[type=number]');nm.value=s.dur;nm.oninput=function(){s.dur=+nm.value||5};
+ c.querySelector('input[type=file]').onchange=function(e){var f=e.target.files[0];if(!f)return;var u=URL.createObjectURL(f),im=new Image();im.onload=function(){s.img=im;s.url=u;th.src=u;frame(vcur*total())};im.src=u};
+ var sn=c.querySelector('.sn');if(s.sbuf)sn.textContent='Sound: '+s.sbuf.duration.toFixed(1)+' s';
+ c.querySelector('.sf').onchange=function(e){var f=e.target.files[0];if(!f)return;sn.textContent='Reading sound...';var fr=new FileReader();fr.onload=function(){try{DCx=DCx||new (window.AudioContext||window.webkitAudioContext)();DCx.decodeAudioData(fr.result,function(b){s.sbuf=b;sn.textContent='Sound: '+b.duration.toFixed(1)+' s'},function(){sn.textContent='Could not read this sound file.'})}catch(x){sn.textContent='Could not read this sound file.'}};fr.readAsArrayBuffer(f)};
+ c.querySelector('.ms').onclick=function(){if(s.sbuf){s.dur=Math.min(20,Math.max(2,Math.ceil(s.sbuf.duration)));nm.value=s.dur}};c.querySelector('.rs').onclick=function(){s.sbuf=null;sn.textContent='';c.querySelector('.sf').value=''};
+ c.querySelector('.u').onclick=function(){if(i){slides.splice(i-1,0,slides.splice(i,1)[0]);buildSl()}};c.querySelector('.dn').onclick=function(){if(i<slides.length-1){slides.splice(i+1,0,slides.splice(i,1)[0]);buildSl()}};
+ c.querySelector('.de').onclick=function(){if(slides.length>1){slides.splice(i,1);buildSl()}else vnote('Keep at least one slide.')};h.appendChild(c)})}
+$('vadd').onclick=function(){slides.push({img:null,url:'',title:'NEW HEADLINE',text:'Write the main text here.',dur:5});buildSl()};
+function vstop(){play=0;cancelAnimationFrame(raf);$('vpp').textContent='Play preview';if(curAu){try{curAu.ac.close()}catch(e){}curAu=null}}
+function vrun(done){var t0=performance.now()+150,tot=total();play=1;(function loop(){var t=Math.max(0,(performance.now()-t0)/1000);vcur=Math.min(1,t/tot);$('vsk').value=Math.round(vcur*1000);frame(Math.min(t,tot));if(!play)return;if(t<tot)raf=requestAnimationFrame(loop);else{play=0;$('vpp').textContent='Play preview';done&&done()}})()}
+$('vpp').onclick=function(){if(play){vstop();return}$('vpp').textContent='Stop';ready().then(function(){curAu=audio(false);vrun(function(){if(curAu){setTimeout(function(){vstop()},800)}})})};
+$('vsk').oninput=function(){vstop();vcur=$('vsk').value/1000;frame(vcur*total())};
+$('vtk').oninput=$('vlab').oninput=$('vcl').oninput=$('vtag').oninput=function(){frame(vcur*total())};$('vin').onchange=$('vout').onchange=function(){vsize()};
+$('vsv').onclick=function(){if(!vout)return;function plain(){var a=document.createElement('a');a.href=URL.createObjectURL(vout.b);a.download=vout.n;document.body.appendChild(a);a.click();a.remove();vnote('Saved to your Downloads.')}
+ if(!DL){plain();return}DL.save({filename:vout.n,data:vout.b}).then(function(){vnote('Saved.')}).catch(function(e){if(e&&e.code=='declined')vnote('Not saved.');else plain()})};
+$('vgen').onclick=function(){if(!window.MediaRecorder){vnote('Video recording is not available on this device.');return}
+ var mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].filter(function(m){return MediaRecorder.isTypeSupported(m)})[0];if(!mt){vnote('Video recording is not available on this device.');return}
+ vstop();$('vv').hidden=$('vsv').hidden=true;$('vgen').disabled=true;vnote('Generating... keep this screen open until it finishes.');
+ ready().then(function(){var au=audio(true),st=VC.captureStream(30);if(au&&au.track)st.addTrack(au.track);var ch=[],r=new MediaRecorder(st,{mimeType:mt,videoBitsPerSecond:4000000});r.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data)};
+  r.onstop=function(){var y=mt.split(';')[0],b=new Blob(ch,{type:y});vout={b:b,n:'arena-pulse-'+VP+'.'+(y.indexOf('mp4')>0?'mp4':'webm')};$('vv').src=URL.createObjectURL(b);$('vv').hidden=false;$('vsv').hidden=false;$('vgen').disabled=false;vnote('Done. Tap Save video.');if(au)try{au.ac.close()}catch(e){}};
+  r.start();vrun(function(){r.stop()})})};
+$('tp').onclick=function(){document.body.classList.remove('wide');$('sp').hidden=false;$('sv2').hidden=true;$('tp').className='';$('tv').className='g'};
+$('tv').onclick=function(){document.body.classList.add('wide');$('sp').hidden=true;$('sv2').hidden=false;$('tv').className='';$('tp').className='g';vsize()};
+buildPl();buildSl();ready().then(function(){vsize()});
+
+if("serviceWorker" in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+</script>
+</body>
+</html>
