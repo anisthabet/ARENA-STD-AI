@@ -36,8 +36,8 @@ input[type=range]{width:100%;accent-color:var(--r)}
 </head>
 <body>
 <h1>ARENA <span>PULSE</span> Studio</h1>
-<p class="s">Posts and news videos for TikTok, Facebook and YouTube.</p>
-<div class="tabs"><button id="tp">Posts</button><button id="tv" class="g">Video</button></div>
+<p class="s">Posts and news videos for TikTok, Facebook and YouTube. Version 7</p>
+<div class="tabs"><button id="tp">Posts</button><button id="tv" class="g">Video</button><button id="tl" class="g">Clubs</button></div>
 <section id="sp">
 <h2>POST TEMPLATE</h2>
 <select id="t"></select>
@@ -51,19 +51,30 @@ input[type=range]{width:100%;accent-color:var(--r)}
 </section>
 <section id="sv2" hidden>
 <div class="vg"><div class="vl">
+<h2>0. WHAT TO MAKE</h2>
+<select id="vmode" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:12px;font:inherit;font-size:15px"><option value="news">News slides (photos + text)</option><option value="match">Match day list</option><option value="results">Scores / results</option><option value="standings">Standings table</option><option value="montage">Montage (photos and clips, quick cuts)</option><option value="lineups">Lineups</option><option value="top5">Top 5 / ranking countdown</option><option value="score">Score card (half time / full time)</option><option value="facts">Facts (big numbers)</option></select>
 <h2>1. FORMAT</h2>
 <div class="pl" id="vpl"></div>
-<h2>2. NEWS SLIDES</h2>
+<div id="vnews"><h2>2. NEWS SLIDES</h2>
 <div id="vsl"></div>
-<button class="g big" id="vadd">+ Add slide</button>
+<button class="g big" id="vadd">+ Add slide</button></div>
+<div id="vlist" hidden><h2>2. LIST CONTENT</h2><label>TITLE</label><input type="text" id="lti" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><label>DATE LINE</label><input type="text" id="ldt" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><div id="vbuild"></div><label id="lhint">ROWS</label><textarea id="lrows" rows="8"></textarea><label>SECONDS TO HOLD EACH PAGE</label><input type="number" id="vhold" value="3" min="1" max="10" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"></div>
 <h2>3. INTRO, CLOSER AND LABEL</h2>
 <label><input type="checkbox" id="vin" checked style="width:auto;margin-right:8px">Logo intro at the start</label><br>
 <label><input type="checkbox" id="vout" checked style="width:auto;margin-right:8px">Closer at the end</label>
+<label style="margin-top:8px">NEWS SLIDES: SECONDS BEFORE THE TEXT APPEARS (the picture shows first)</label>
+<input type="number" id="vdelay" value="1" min="0" max="5" step="0.5" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
+<label style="margin-top:8px">MONTAGE: SECONDS THE TEXT SHOWS BEFORE THE PICTURE OR VIDEO STARTS</label>
+<input type="number" id="vmdelay" value="1.5" min="0" max="5" step="0.5" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
+<label style="margin-top:8px"><input type="checkbox" id="vmagic" checked style="width:auto;margin-right:8px">Magic effects in montage (sparkles, light, glow)</label>
+<label style="margin-top:8px">TRANSITION STYLE (montage)</label>
+<select id="vtr" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:12px;font:inherit;font-size:15px;margin:4px 0 10px"><option>Mix</option><option>Red wipe</option><option>Flash</option><option>Iris circle</option><option>Bars</option><option>Glitch</option></select>
 <label style="margin-top:8px">CLOSER WORD (FOLLOW, SUBSCRIBE...)</label>
 <input type="text" id="vcl" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
 <label>RED TAG ABOVE THE TEXT (instead of PULSE NEWS)</label>
 <input type="text" id="vtag" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px">
 <h2>4. TICKER (BOTTOM)</h2>
+<label><input type="checkbox" id="vtkon" style="width:auto;margin-right:8px">Show ticker in list videos</label>
 <label>TICKER WORD (instead of NEWS)</label>
 <input type="text" id="vlab" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 10px">
 <label>TICKER CONTENT (one line per item)</label>
@@ -80,6 +91,18 @@ input[type=range]{width:100%;accent-color:var(--r)}
 <video id="vv" controls playsinline hidden></video>
 <button class="big" id="vsv" hidden>Save video</button>
 </div></div>
+</section>
+<section id="sl2" hidden>
+<datalist id="dl-clubs"></datalist><datalist id="dl-comps"></datalist>
+<h2>CLUBS AND COMPETITIONS</h2>
+<p class="n" style="text-align:left">The top 5 leagues, European clubs and the main competitions are already saved here. Add a logo to each one (upload a picture, or paste a logo link and tap Load logo). Then choose them from the lists when you make posts and videos.</p>
+<div class="bt"><button id="tabc">Clubs</button><button class="g" id="tabm">Competitions</button></div>
+<label style="margin-top:10px">SEARCH</label><input type="text" id="lsr" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px">
+<label>GROUP</label><select id="lgs"></select>
+<div id="lc"></div>
+<div class="card"><label>ADD A NEW ONE</label><input type="text" id="ncn" placeholder="Name" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><input type="text" id="ncl" placeholder="Group (for example Premier League)" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><input type="text" id="ncu" placeholder="Logo link (optional)" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><label>OR UPLOAD LOGO</label><input type="file" accept="image/*" id="ncf"><button class="big" id="nca">Add</button></div>
+<div class="card"><label>IMPORT MANY LOGOS: one per line as  Name | logo link</label><textarea id="lbulk" rows="5" placeholder="Arsenal | https://example.com/arsenal.png"></textarea><button class="big" id="lbb">Import logo links</button></div>
+<p class="n" id="ln"></p>
 </section>
 <script>
 var K='#0B0B0D',R='#E53935',W='#fff',G='#A7A7A7',S='#24252B';
@@ -99,36 +122,36 @@ function rowp(l,re){var m=l.match(re);return m}
 var bg=null,vb=null,vext='webm',photos=[],LT=0,L={hs:0,as:0,t:0,run:false};
 var D={
 'Match Day post':{f:[['comp','Competition','PREMIER LEAGUE'],['date','Date','SATURDAY 7 NOVEMBER'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED'],['time','Kick-off time','4:00 PM']],
- d:function(v){head('MATCH DAY','FOOTBALL',1350);T(v.comp,72,310,64,W,'left',936);T(v.date,72,375,30,G,'left',936,500);
-  Q(72,450,936,200,S);Q(72,450,14,200,R);T(v.home,540,550,84,W,'center',860);Q(72,790,936,200,S);Q(72,790,14,200,R);T(v.away,540,890,84,W,'center',860);
+ d:function(v){head('MATCH DAY','FOOTBALL',1350);CT(v.comp,72,310,64,936,W);T(v.date,72,375,30,G,'left',936,500);
+  Q(72,450,936,200,S);Q(72,450,14,200,R);TN(v.home,540,550,84,860,450,200);Q(72,790,936,200,S);Q(72,790,14,200,R);TN(v.away,540,890,84,860,790,200);
   X.fillStyle=R;X.beginPath();X.arc(540,720,50,0,7);X.fill();T('VS',540,720,40,W,'center');
   Q(72,1030,936,120,R);T(v.time,540,1092,86,W,'center');T('KICK-OFF  •  CET',540,1185,26,G,'center',0,500);foot(1280)}},
 'Match day list':{f:[['title','Title','MATCH DAY'],['date','Date','SATURDAY 7 NOVEMBER'],['rows','One match per line: TIME|HOME|AWAY|COMPETITION (up to 10)','1:30 PM|Leeds United|Tottenham|Premier League\n4:00 PM|Arsenal|Hull City|Premier League\n9:00 PM|Atletico Madrid|Bayern Munich|Champions League','area']],
  d:function(v){head('MATCH DAY','FOOTBALL',1920);T(v.title,72,300,46,W,'left',936);T(v.date,72,350,26,G,'left',936,500);
-  lines(v.rows).slice(0,10).forEach(function(l,i){var p=l.split('|'),y=430+i*134;Q(72,y,936,122,S);Q(72,y,200,122,R);T(p[0]||'',172,y+61,36,W,'center',180);T((p[3]||'').toUpperCase(),300,y+22,22,R,'left',680);T((p[1]||'').toUpperCase(),300,y+58,32,W,'left',680);T((p[2]||'').toUpperCase(),300,y+98,32,W,'left',680)});foot(1825,'ALL TIMES: CET')}},
+  lines(v.rows).slice(0,10).forEach(function(l,i){var p=l.split('|'),y=430+i*134;Q(72,y,936,122,S);Q(72,y,200,122,R);T(p[0]||'',172,y+61,36,W,'center',180);var cl=LG('comps',p[3],300,y+6,32),hl=LG('clubs',p[1],300,y+36,44),al=LG('clubs',p[2],300,y+76,44);T((p[3]||'').toUpperCase(),300+(cl?42:0),y+22,22,R,'left',680);T((p[1]||'').toUpperCase(),300+(hl?56:0),y+58,32,W,'left',680-(hl?56:0));T((p[2]||'').toUpperCase(),300+(al?56:0),y+98,32,W,'left',680-(al?56:0))});foot(1825,'ALL TIMES: CET')}},
 'Live scoreboard':{live:true,f:[['comp','Competition','PREMIER LEAGUE'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED']],
- d:function(v){head('LIVE','FOOTBALL',1350);T(v.comp,72,310,52,W,'left',936);T(v.home.toUpperCase(),270,560,44,W,'center',400);T(v.away.toUpperCase(),810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
+ d:function(v){head('LIVE','FOOTBALL',1350);CT(v.comp,72,310,52,936,W);LG('clubs',v.home,210,405,120);LG('clubs',v.away,750,405,120);T(v.home.toUpperCase(),270,560,44,W,'center',400);T(v.away.toUpperCase(),810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
   var m=Math.floor(v.t/60),c=(m<10?'0':'')+m+':'+(v.t%60<10?'0':'')+(v.t%60);T(c,540,790,90,R,'center');T('MATCH CLOCK',540,860,24,G,'center',0,500);foot(1290,'SCORES ENTERED BY ARENA PULSE')}},
 
 'Half time / Full time':{f:[['stage','Stage','FULL TIME'],['comp','Competition','CHAMPIONS LEAGUE'],['home','Home team','BARCELONA'],['away','Away team','ASTON VILLA'],['hs','Home score','3'],['as','Away score','0'],['hg','Home scorers (one per line)','Player name 12\u2019\nPlayer name 55\u2019','area'],['ag','Away scorers (one per line)','','area']],
- d:function(v){head(v.stage.toUpperCase(),'FOOTBALL',1350);T(v.comp,72,310,52,W,'left',936);
-  T(v.home,270,560,44,W,'center',400);T(v.away,810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
+ d:function(v){head(v.stage.toUpperCase(),'FOOTBALL',1350);CT(v.comp,72,310,52,936,W);
+  LG('clubs',v.home,210,405,120);LG('clubs',v.away,750,405,120);T(v.home,270,560,44,W,'center',400);T(v.away,810,560,44,W,'center',400);Q(410,440,260,240,R);T(v.hs+' - '+v.as,540,560,100,W,'center',240);
   Q(72,740,936,6,S);lines(v.hg).slice(0,6).forEach(function(l,i){T(l,72,790+i*52,30,W,'left',440,500)});lines(v.ag).slice(0,6).forEach(function(l,i){T(l,568,790+i*52,30,W,'left',440,500)});foot(1290,'SOURCE: ')}},
 'Results post':{f:[['title','Title','CHAMPIONS LEAGUE RESULTS'],['date','Date','TUESDAY 3 NOVEMBER'],['rows','One result per line (Team 2-1 Team)','Barcelona 3-0 Aston Villa\nAtletico Madrid 0-2 Bayern Munich\nVillarreal 0-6 Paris Saint-Germain\nManchester United 3-2 AS Roma','area']],
  d:function(v){head('FULL TIME','FOOTBALL',1350);T(v.title,72,300,50,W,'left',936);T(v.date,72,350,26,G,'left',936,500);
   var L=lines(v.rows).slice(0,9),n=L.length||1,h=Math.min(86,(790/n)-8),y=395;
   L.forEach(function(l){var m=l.match(/^(.*?)\s+(\d+)\s*[-–:]\s*(\d+)\s+(.*)$/)||[0,l,'-','-',''];Q(72,y,936,h,S);Q(72,y,12,h,R);
-   T(m[1].toUpperCase(),455,y+h/2,30,W,'right',340);T(m[4].toUpperCase(),625,y+h/2,30,W,'left',340);Q(475,y+8,130,h-16,R);T(m[2]+' - '+m[3],540,y+h/2,36,W,'center');y+=h+8});
+   LG('clubs',m[1],84,y+6,h-12);LG('clubs',m[4],1008-12-(h-12),y+6,h-12);T(m[1].toUpperCase(),455,y+h/2,30,W,'right',290);T(m[4].toUpperCase(),625,y+h/2,30,W,'left',290);Q(475,y+8,130,h-16,R);T(m[2]+' - '+m[3],540,y+h/2,36,W,'center');y+=h+8});
   foot(1290,'SOURCE: ')}},
 'Standings table':{f:[['title','Title','CHAMPIONS LEAGUE STANDINGS'],['sub','Subtitle','AFTER MATCHDAY 4'],['rows','Team W D L Pts (one per line, up to 18)','Paris Saint-Germain 3 0 0 9\nAston Villa 3 0 0 9\nLiverpool 3 0 0 9\nReal Madrid 3 0 0 9\nReal Betis 3 0 0 9\nVfB Stuttgart 2 1 0 7','area']],
  d:function(v){head('STANDINGS','FOOTBALL',1920);T(v.title,72,300,46,W,'left',936);T(v.sub,72,350,26,G,'left',936,500);
   [[655,'W'],[730,'D'],[805,'L']].forEach(function(q){T(q[1],q[0],405,24,G,'center',0,500)});T('PTS',990,405,24,G,'right',0,500);
   lines(v.rows).slice(0,18).forEach(function(l,i){var m=l.match(/^(.*?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)||[0,l,'','','',''],y=430+i*72;
-   Q(72,y,936,66,S);Q(72,y,70,66,R);T(String(i+1),107,y+33,34,W,'center');T(m[1].toUpperCase(),165,y+33,32,W,'left',460);
+   Q(72,y,936,66,S);Q(72,y,70,66,R);T(String(i+1),107,y+33,34,W,'center');var lg=LG('clubs',m[1],152,y+6,54);T(m[1].toUpperCase(),lg?218:165,y+33,32,W,'left',lg?410:460);
    [[655,2],[730,3],[805,4]].forEach(function(q){T(m[q[1]],q[0],y+33,30,G,'center',0,500)});T(m[5],985,y+33,36,W,'right')});foot(1825,'SOURCE: ')}},
 'Lineups':{f:[['title','Title','STARTING LINEUPS'],['home','Home team','FULHAM'],['away','Away team','NEWCASTLE UNITED'],['hform','Home formation','4-2-3-1'],['aform','Away formation','4-3-3'],['hl','Home XI (one per line: number name)','1 Goalkeeper\n2 Player\n3 Player\n4 Player\n5 Player\n6 Player\n7 Player\n8 Player\n9 Player\n10 Player\n11 Player','area'],['al','Away XI (one per line: number name)','1 Goalkeeper\n2 Player\n3 Player\n4 Player\n5 Player\n6 Player\n7 Player\n8 Player\n9 Player\n10 Player\n11 Player','area']],
  d:function(v){head('LINEUPS','FOOTBALL',1350);T(v.title,72,300,50,W,'left',936);
-  [[72,v.home,v.hform,v.hl],[550,v.away,v.aform,v.al]].forEach(function(c){var x=c[0];Q(x,350,458,70,R);T(c[1].toUpperCase(),x+20,385,28,W,'left',300);T(c[2],x+438,385,26,W,'right',0,500);
+  [[72,v.home,v.hform,v.hl],[550,v.away,v.aform,v.al]].forEach(function(c){var x=c[0];Q(x,350,458,70,R);var lg=LG('clubs',c[1],x+8,356,58);T(c[1].toUpperCase(),x+(lg?76:20),385,28,W,'left',lg?240:300);T(c[2],x+438,385,26,W,'right',0,500);
    lines(c[3]).slice(0,11).forEach(function(l,i){var m=l.match(/^(\d+)\s+(.*)$/)||[0,String(i+1),l],y=432+i*62;Q(x,y,458,56,S);Q(x,y,56,56,R);T(m[1],x+28,y+28,26,W,'center');T(m[2].toUpperCase(),x+74,y+28,26,W,'left',370)})});foot(1290,'SOURCE: ')}},
 'News post':{f:[['sport','Sport','FOOTBALL'],['head','Headline','CAF AWARDS 2026: 10 NOMINEES FOR PLAYER OF THE YEAR'],['body','Short text','The shortlist is out. Who deserves to win?'],['src','Source','SOURCE: CAF']],
  d:function(v){head('PULSE NEWS',v.sport.toUpperCase(),1350);var s=100,L;while((L=wrap(v.head.toUpperCase(),s,936)).length>4&&s>40)s-=4;
@@ -139,7 +162,7 @@ var D={
   wrap(v.line,36,936,500).slice(0,3).forEach(function(l,i){T(l,72,900+i*54,36,G,'left',936,500)});foot(1290,v.src)}},
 'YouTube thumbnail':{f:[['tag','Tag','MATCH DAY'],['home','Home team','NOTTINGHAM FOREST'],['away','Away team','MANCHESTER CITY'],['day','Day','SATURDAY'],['time','Time','6:30'],['ap','AM / PM + zone','PM  CET'],['bot','Bottom line','PREMIER LEAGUE  •  7 NOVEMBER']],
  d:function(v){C.width=1280;C.height=720;Q(0,0,1280,720,K);sym(50,36,80);T('ARENA PULSE',145,76,30,W);var w=(F(28),X.measureText(v.tag).width+48);Q(1230-w,40,w,60,R);T(v.tag,1230-w/2,70,28,W,'center');
-  Q(60,560,1160,6,R);Q(870,190,360,330,R);T(v.home,60,300,100,W,'left',780);T('VS',60,390,48,R);T(v.away,60,475,100,W,'left',780);
+  Q(60,560,1160,6,R);Q(870,190,360,330,R);var hl=LG('clubs',v.home,60,235,120),al=LG('clubs',v.away,60,410,120);T(v.home,hl?200:60,300,100,W,'left',hl?640:780);T('VS',60,390,48,R);T(v.away,al?200:60,475,100,W,'left',al?640:780);
   T(v.day,1050,250,40,W,'center',320);T(v.time,1050,360,130,W,'center',320);T(v.ap,1050,450,40,W,'center',320);T(v.bot,60,625,34,G,'left',1100,500)}}
 };
 var sel=document.getElementById('t'),box=document.getElementById('f'),img=document.getElementById('o'),vid=document.getElementById('v'),sv=document.getElementById('sv'),mb=document.getElementById('b'),nt=document.getElementById('n');
@@ -148,15 +171,21 @@ function note(s){nt.textContent=s}
 function build(){clearInterval(LT);L={hs:0,as:0,t:0,run:false};mb.hidden=!!D[sel.value].live;box.innerHTML='';mb.textContent='Make image';img.hidden=vid.hidden=sv.hidden=C.hidden=true;note('');
  D[sel.value].f.forEach(function(q){var l=document.createElement('label');l.textContent=q[1].toUpperCase();var i;
   if(q[3]=='sel'){i=document.createElement('select');q[4].forEach(function(z){var o=document.createElement('option');o.textContent=z;i.appendChild(o)})}
+  else if(q[3]=='vfile'){i=document.createElement('input');i.type='file';i.accept='video/*';i.onchange=function(){var fl=i.files[0];if(!fl)return;tv.src=URL.createObjectURL(fl);tv.onloadeddata=seekPos}}
+  else if(q[3]=='range'){i=document.createElement('input');i.type='range';i.min=0;i.max=100;i.value=q[2];i.oninput=seekPos}
   else if(q[3]=='files'){i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=true;i.onchange=function(){photos=[];Array.prototype.forEach.call(i.files,function(fl,k){var im=new Image();im.onload=function(){photos[k]=im};im.src=URL.createObjectURL(fl)});note(i.files.length+' photo(s) selected.')}}
   else if(q[3]=='file'){i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=function(){var fl=i.files[0];if(!fl)return;var im=new Image();im.onload=function(){bg=im};im.src=URL.createObjectURL(fl)}}
   else{i=document.createElement(q[3]?'textarea':'input');if(q[3])i.rows=5;i.value=q[2]}
-  i.id='i_'+q[0];box.appendChild(l);box.appendChild(i)});if(D[sel.value].live)liveUI()}
+  i.id='i_'+q[0];box.appendChild(l);box.appendChild(i)});[['home','clubs'],['away','clubs'],['comp','comps']].forEach(function(q){var e=document.getElementById('i_'+q[0]);if(!e)return;e.setAttribute('list',q[1]=='clubs'?'dl-clubs':'dl-comps');if(e.parentNode&&LIB){var sl=mkSel(q[1]);sl.onchange=function(){if(sl.value){e.value=sl.value;sl.value=''}};e.parentNode.insertBefore(sl,e)}});
+ var bt=({'Match day list':'match','Results post':'results','Standings table':'standings'})[sel.value];if(bt){var ta0=document.getElementById('i_rows');if(ta0)box.insertBefore(builder(bt,ta0),ta0.previousSibling)}
+ if(D[sel.value].live)liveUI()}
 function vals(){var v={};D[sel.value].f.forEach(function(q){v[q[0]]=document.getElementById('i_'+q[0]).value});return v}
 var DL=null;try{claude.use('downloads').then(function(d){DL=d}).catch(function(){})}catch(e){}
 var cur=null;
-sv.onclick=function(){if(!cur)return;if(!DL){note('Press and hold the picture or video, then choose Save.');return}
- DL.save({filename:cur.name,data:cur.blob}).then(function(){note('Saved.')}).catch(function(e){note(e&&e.code=='declined'?'Not saved.':'Saving is not available here. Press and hold the picture to save it.')})};
+sv.onclick=function(){if(!cur)return;
+ function plain(){var a=document.createElement('a');a.href=URL.createObjectURL(cur.blob);a.download=cur.name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},500);note('Saved to your Downloads. If you cannot find it, press and hold the picture and choose Save image.')}
+ if(!DL){plain();return}
+ DL.save({filename:cur.name,data:cur.blob}).then(function(){note('Saved.')}).catch(function(e){if(e&&e.code=='declined')note('Not saved.');else plain()})};
 function ready(){return Promise.all([document.fonts.load('800 40px Poppins'),document.fonts.load('500 40px Poppins')]).catch(function(){})}
 function makeImage(){var v=vals();ready().then(function(){X=PX;D[sel.value].d(v);C.toBlob(function(b){cur={blob:b,name:'arena-pulse-'+sel.value.toLowerCase().replace(/[^a-z]+/g,'-')+'.png'};img.src=URL.createObjectURL(b);img.hidden=false;sv.textContent='Save image';sv.hidden=false;note('Done. Tap Save image.')},'image/png')})}
 function liveDraw(){var v=vals();v.hs=L.hs;v.as=L.as;v.t=L.t;ready().then(function(){X=PX;D[sel.value].d(v);C.hidden=false;img.hidden=true})}
@@ -168,7 +197,7 @@ function liveUI(){var g=btn('Home goal +1',function(){L.hs++;liveDraw()});btn('A
 sel.onchange=build;mb.onclick=makeImage;build();
 
 var $=function(i){return document.getElementById(i)};
-var DCx=null,VP='tiktok',VW=1080,VH=1920,SC=2/3,vcur=0,play=0,raf=0,curAu=null,vout=null,tkW=0,tkT='';
+var DCx=null,VM='news',MT=0,LK='match',VP='tiktok',VW=1080,VH=1920,SC=2/3,vcur=0,play=0,raf=0,curAu=null,vout=null,tkW=0,tkT='';
 var PL=[['tiktok','TikTok 9:16'],['facebook','Facebook 9:16'],['youtube','YouTube 16:9']];
 var slides=[{img:null,url:'',title:'FULL TIME',text:'Barcelona 3-0 Aston Villa in the Champions League.',dur:5},{img:null,url:'',title:'PSG WIN 6-0',text:'Paris Saint-Germain win 6-0 away at Villarreal.',dur:5}];
 $('vtk').value='BARCELONA 3-0 ASTON VILLA\nVILLARREAL 0-6 PARIS SAINT-GERMAIN\nATLETICO MADRID 0-2 BAYERN MUNICH\nMANCHESTER UNITED 3-2 AS ROMA\nFEYENOORD 0-3 INTER';
@@ -177,13 +206,51 @@ function rr(x,y,w,h,r){X.beginPath();X.moveTo(x+r,y);X.arcTo(x+w,y,x+w,y+h,r);X.
 function cl(x){return Math.max(0,Math.min(1,x))}
 function E(x){x=cl(x);return 1-Math.pow(1-x,3)}
 function EB(x){x=cl(x);var c=1.25,d=c+1;return 1+d*Math.pow(x-1,3)+c*Math.pow(x-1,2)}
+
+var LIB={clubs:[],comps:[]},IM={};try{var sv_=localStorage.getItem('pulse-lib');if(sv_)LIB=JSON.parse(sv_);LIB.clubs=LIB.clubs||[];LIB.comps=LIB.comps||[]}catch(e){}
+function saveLib(){try{localStorage.setItem('pulse-lib',JSON.stringify(LIB))}catch(e){libNote('Could not save: storage is full or blocked.')}}
+function lk(x){return String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim()}
+function esc(x){return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function ldImg(kind,e){var key=kind+'|'+e.n;if(!IM[key]||IM[key].src!==e.d){var im=new Image();im.onload=function(){if(typeof frame=='function'&&!$('sv2').hidden)frame(vcur*total())};im.src=e.d;IM[key]=im}return IM[key]}
+function nm_(e){return [e.n].concat(e.a||[]).map(lk).filter(Boolean)}
+function findEntry(kind,name){var k=lk(name);if(!k)return null;var a=LIB[kind],e=null,i;for(i=0;i<a.length&&!e;i++)if(nm_(a[i]).indexOf(k)>=0)e=a[i];
+ for(i=0;i<a.length&&!e;i++)nm_(a[i]).forEach(function(q){if(!e&&q.length>3&&new RegExp('\\b'+esc(q)+'\\b').test(k))e=a[i]});return e}
+function findLogo(kind,name){var e=findEntry(kind,name);if(!e||!e.d)return null;var im=ldImg(kind,e);return im.complete&&im.naturalWidth?im:null}
+function LG(kind,name,x,y,sz){var im=findLogo(kind,name);if(!im)return false;X.fillStyle='rgba(255,255,255,.96)';X.beginPath();X.arc(x+sz/2,y+sz/2,sz/2,0,7);X.fill();var b=sz*.78,r=Math.min(b/im.naturalWidth,b/im.naturalHeight),w=im.naturalWidth*r,h=im.naturalHeight*r;X.drawImage(im,x+(sz-w)/2,y+(sz-h)/2,w,h);return true}
+function CT(name,x,y,size,mw,col){var sz=size*1.1,has=LG('comps',name,x,y-sz/2,sz);T(name,x+(has?sz+16:0),y,size,col,'left',mw-(has?sz+16:0))}
+function TN(name,cx,cy,size,mw,cardY,cardH){var has=LG('clubs',name,100,cardY+25,cardH-50);T(name,cx+(has?80:0),cy,size,W,'center',mw-(has?190:0))}
+function preloadLib(){['clubs','comps'].forEach(function(k){LIB[k].forEach(function(e){if(e.d)ldImg(k,e)})})}
+var INPS='style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"';
 var memo={};function fit(t,w,h,mx,mn){var k=t+w+h;if(memo[k])return memo[k];var s=mx,L;for(;s>=mn;s-=4){L=wrap(t,s,w);if(L.length*s*1.2<=h)break}return memo[k]={L:L,s:Math.max(s,mn)}}
 var pts=[];for(var pi=0;pi<40;pi++){var q=Math.sin(pi*91.7)*43758.5;pts.push({x:(q-Math.floor(q)),y:((q*7)%1+1)%1,v:20+((q*13)%1+1)%1*50,r:2+((q*3)%1+1)%1*5,a:.12+((q*5)%1+1)%1*.3})}
 function fit2(t,w,h,mx,mn,wt){var k=t+'|'+w+'|'+Math.round(h)+'|'+wt;if(memo[k])return memo[k];var s=mx,L;for(;s>=mn;s-=2){L=wrap(t,s,w,wt);if(L.length*s*1.22<=h)break}return memo[k]={L:L,s:Math.max(s,mn)}}
 function partial(a,f){var L=[],tot=0,i;for(i=0;i<a.length-1;i++){var d=Math.hypot(a[i+1][0]-a[i][0],a[i+1][1]-a[i][1]);L.push(d);tot+=d}var m=tot*f,o=[a[0]],acc=0;for(i=0;i<L.length;i++){if(acc+L[i]<=m){o.push(a[i+1]);acc+=L[i]}else{var r=(m-acc)/L[i];o.push([a[i][0]+(a[i+1][0]-a[i][0])*r,a[i][1]+(a[i+1][1]-a[i][1])*r]);break}}return o}
 function IN(){return $('vin')&&$('vin').checked?2.2:0}
 function OUT(){return $('vout')&&$('vout').checked?3.8:0}
-function stot(){return slides.reduce(function(a,s){return a+Math.max(2,+s.dur||5)},0)}
+function lplan(){var rows=$('lrows').value.split('\n').map(function(x){return x.trim()}).filter(Boolean),per=(LK=='score'||LK=='facts')?1:LK=='lineups'?6:VP=='youtube'?5:6,hold=Math.max(1,+$('vhold').value||3),pg=[],t0=0;for(var i=0;i<rows.length;i+=per){var r=rows.slice(i,i+per),d=.8+r.length*.35+hold+.5;pg.push({r:r,s:t0,d:d,i0:i});t0+=d}if(!pg.length)pg.push({r:[],s:0,d:2,i0:0});return pg}
+function ltot(){var p=lplan(),l=p[p.length-1];return l.s+l.d}
+function stot(){return VM=='list'?ltot():slides.reduce(function(a,s){return a+Math.max(2,+s.dur||5)},0)}
+function chrome(tt,vert){var ba=E(tt/.6);X.globalAlpha=ba;Q(40,60,340,100,'rgba(11,11,13,.92)');Q(40,154,340,6,R);sym(54,70,74);T('ARENA PULSE',140,107,30,W);X.globalAlpha=1;
+ if($('vtkon').checked){var lab=($('vlab').value||'NEWS').toUpperCase(),ls=$('vtk').value.split('\n').map(function(x){return x.trim()}).filter(Boolean),tk=(ls.length?ls.join('   •   '):'ARENA PULSE')+'   •   ',ky=vert?1760:960;F(26);var lw=X.measureText(lab).width+70;if(tk!=tkT){tkT=tk;F(30,500);tkW=X.measureText(tk).width}
+  Q(0,ky,VW,72,'rgba(11,11,13,.95)');Q(0,ky,VW,4,R);X.save();X.beginPath();X.rect(lw,ky,VW-lw,72);X.clip();var o=(tt*150)%tkW;for(var k=0;k<5;k++)T(tk,lw+20-o+k*tkW,ky+38,30,W,'left',0,500);X.restore();Q(0,ky+4,lw,68,R);T(lab,lw/2,ky+38,26,W,'center')}
+ T('ARENA PULSE  •  EVERY SPORT. EVERY STORY.',vert?540:80,vert?1868:1052,24,G,vert?'center':'left',0,500)}
+function listFrame(tt,vert){var pg=lplan(),pi=0;for(;pi<pg.length-1;pi++){if(tt<pg[pi].s+pg[pi].d)break}var P0=pg[pi],u=tt-P0.s,ao=1-E((u-(P0.d-.5))/.5);
+ var x0=vert?72:200,w=vert?936:1520,ty=vert?260:215,dy=vert?330:270,y0=(vert?400:310)+(LK=='lineups'?70:0),rh=vert?150:100,pt=vert?175:112,tl=$('lti').value||'',dt=$('ldt').value||'';
+ X.globalAlpha=E(u/.5)*ao;T(tl.toUpperCase(),x0,ty,vert?64:58,W,'left',w);T(dt.toUpperCase(),x0,dy,28,G,'left',w,500);Q(x0,dy+34,Math.min(w,300)*E(u/.8),6,R);if(LK=='lineups'){var tm=(tl||'').split(/\s+v(?:s)?\.?\s+/i),hw=w/2-4;X.globalAlpha=E(u/.5)*ao;Q(x0,y0-64,hw,52,R);T((tm[0]||'').toUpperCase(),x0+hw/2,y0-38,26,W,'center',hw-30);Q(x0+w/2+4,y0-64,hw,52,'#3a3b42');T((tm[1]||'').toUpperCase(),x0+w/2+4+hw/2,y0-38,26,W,'center',hw-30)}X.globalAlpha=1;
+ P0.r.forEach(function(l,i){var e=E((u-.6-(LK=='top5'?P0.r.length-1-i:i)*.35)/.4)*ao;if(e<=0)return;X.globalAlpha=e;X.save();X.translate(100*(1-e),0);var y=y0+i*pt,pa=l.split('|');if(LK!='score'&&LK!='facts')Q(x0,y,w,rh,S);
+  if(LK=='match'){var tb=vert?200:220;Q(x0,y,tb,rh,R);T(pa[0]||'',x0+tb/2,y+rh/2,vert?40:44,W,'center',tb-20);var cl=LG('comps',pa[3],x0+tb+26,y+8,30),sz=rh*.46,hl=LG('clubs',pa[1],x0+tb+24,y+rh*.42,sz),al=LG('clubs',pa[2],x0+w-24-sz,y+rh*.42,sz),tx0=x0+tb+30+(hl?sz+14:0);T((pa[3]||'').toUpperCase(),x0+tb+30+(cl?38:0),y+(vert?32:28),22,R,'left',w-tb-60);T(((pa[1]||'')+'  VS  '+(pa[2]||'')).toUpperCase(),tx0,y+rh*.64,vert?36:40,W,'left',x0+w-24-(al?sz+14:0)-tx0)}
+  else if(LK=='results'){var m=(pa[0]||'').match(/^(.*?)\s+(\d+)\s*[-–:]\s*(\d+)\s+(.*)$/)||[0,pa[0]||'','-','-',''],cx=x0+w/2;Q(cx-100,y+10,200,rh-20,R);T(m[2]+' - '+m[3],cx,y+rh/2+(pa[1]?6:0),56,W,'center',180);var ls=vert?70:60,hl=LG('clubs',m[1],x0+16,y+(rh-ls)/2,ls),al=LG('clubs',m[4],x0+w-16-ls,y+(rh-ls)/2,ls),mw2=w/2-150-(hl?ls+14:0);T(m[1].toUpperCase(),cx-125,y+rh/2,vert?34:40,W,'right',mw2);T(m[4].toUpperCase(),cx+125,y+rh/2,vert?34:40,W,'left',mw2);if(pa[1])T(pa[1].toUpperCase(),cx,y+16,16,G,'center',180,500)}
+  else if(LK=='lineups'){var hw2=w/2-4,pr=[pa[0]||'',pa[1]||''];Q(x0+w/2-4,y,8,rh,K);[0,1].forEach(function(c){var m=pr[c].trim().match(/^(\d+)\s+(.*)$/)||[0,'',pr[c].trim()],bx2=x0+c*(w/2+4);Q(bx2,y,70,rh,c?'#3a3b42':R);T(m[1],bx2+35,y+rh/2,34,W,'center');T(m[2].toUpperCase(),bx2+88,y+rh/2,vert?30:32,W,'left',hw2-100)})}
+  else if(LK=='top5'){var rk=P0.i0+i+1,lg5=LG('clubs',pa[0],x0+104,y+rh*.2,rh*.6),nx=x0+(lg5?104+rh*.6+16:120);if(rk==1)Q(x0+90,y,w-90,rh,'#3a1517');Q(x0,y,90,rh,R);T(String(rk),x0+45,y+rh/2,52,W,'center');T((pa[0]||'').toUpperCase(),nx,y+rh/2,vert?38:42,W,'left',x0+w-nx-(pa[1]?300:20));if(pa[1])T(pa[1],x0+w-24,y+rh/2,vert?38:42,R,'right',270)}
+  else if(LK=='score'){var m=(pa[0]||'').match(/^(.*?)\s+(\d+)\s*[-–:]\s*(\d+)\s+(.*)$/)||[0,pa[0]||'','0','0',''],cx=VW/2,ce=E((u-1)/.9),hs=Math.round(m[2]*ce),as2=Math.round(m[3]*ce);
+   if(vert){LG('clubs',m[1],cx-85,300,170);T(m[1].toUpperCase(),cx,520,60,W,'center',900);Q(cx-230,590,460,300,R);T(hs+' - '+as2,cx,740,170,W,'center',420);T(m[4].toUpperCase(),cx,960,60,W,'center',900);LG('clubs',m[4],cx-85,1000,170)}
+   else{LG('clubs',m[1],cx-635,260,150);T(m[1].toUpperCase(),cx-560,470,48,W,'center',520);Q(cx-230,330,460,250,R);T(hs+' - '+as2,cx,455,150,W,'center',420);T(m[4].toUpperCase(),cx+560,470,48,W,'center',520);LG('clubs',m[4],cx+485,260,150)}
+   if(pa[1])T(pa[1].toUpperCase(),cx,vert?1225:660,26,R,'center',900);
+   [[pa[2],vert?72:cx-700],[pa[3],vert?cx+20:cx+60]].forEach(function(c){(c[0]||'').split(',').map(function(z){return z.trim()}).filter(Boolean).slice(0,5).forEach(function(z,k){T(z,c[1],(vert?1290:730)+k*44,30,W,'left',vert?440:620,500)})})}
+  else if(LK=='facts'){var cx=VW/2;T(pa[0]||'',cx,vert?640:380,vert?300:230,R,'center',w);T((pa[1]||'').toUpperCase(),cx,vert?900:560,vert?64:60,W,'center',w);wrap(pa[2]||'',vert?38:36,w-40,500).slice(0,4).forEach(function(l2,k){T(l2,cx,(vert?1000:640)+k*54,vert?38:36,G,'center',w,500)})}
+  else{var m2=(pa[0]||'').match(/^(.*?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)||[0,pa[0]||'','','','',''];Q(x0,y,90,rh,R);T(String(P0.i0+i+1),x0+45,y+rh/2,44,W,'center');var lg=LG('clubs',m2[1],x0+104,y+rh*.2,rh*.6);T(m2[1].toUpperCase(),x0+(lg?104+rh*.6+16:120),y+rh/2,vert?36:40,W,'left',w-(lg?104+rh*.6+16:120)-380);[[w-330,2],[w-250,3],[w-170,4]].forEach(function(c){T(m2[c[1]],x0+c[0],y+rh/2,32,G,'center',0,500)});T(m2[5],x0+w-30,y+rh/2,46,W,'right')}
+  X.restore();X.globalAlpha=1});chrome(tt,vert)}
+
 function total(){return IN()+stot()+OUT()}
 function bgd(t){var g=X.createLinearGradient(0,0,0,VH);g.addColorStop(0,'#0B0B0D');g.addColorStop(1,'#181a21');X.fillStyle=g;X.fillRect(0,0,VW,VH);
  X.fillStyle='rgba(255,255,255,.028)';var off=(t*55)%240;for(var k=-6;k<14;k++){var x=k*240+off;X.beginPath();path([[x,0],[x+100,0],[x+100-VH*.35,VH],[x-VH*.35,VH]]);X.fill()}
@@ -202,21 +269,51 @@ function closer(t,vert){var tx=vert?VW/2:700,al=vert?'center':'left',s=300*EB((t
  var by=vert?VH*.54:VH*.45,bh=140,bx=vert?100:700,bw=vert?880:1060,w=bw*E((t-1)/.45);if(w>0)Q(bx,by,w,bh,R);
  X.globalAlpha=E((t-1.25)/.3);T(($('vcl').value||'FOLLOW').toUpperCase(),bx+bw/2,by+bh/2+4,92,W,'center',bw-60);
  X.globalAlpha=E((t-1.7)/.4);T('ARENA PULSE',tx,by+bh+(vert?100:80),56,W,al);X.globalAlpha=E((t-2.1)/.4);T('EVERY SPORT. EVERY STORY.',tx,by+bh+(vert?170:150),30,G,al,0,500);X.globalAlpha=1}
+function magic(t){var v=X.createRadialGradient(VW/2,VH/2,Math.min(VW,VH)*.3,VW/2,VH/2,Math.hypot(VW,VH)*.55);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.5)');X.fillStyle=v;X.fillRect(0,0,VW,VH);
+ var ph=(t%3.5)/3.5,x=-400+ph*(VW+800);X.fillStyle='rgba(255,255,255,.09)';X.beginPath();path([[x,0],[x+140,0],[x+140-VH*.4,VH],[x-VH*.4,VH]]);X.fill();
+ pts.forEach(function(p,k){if(k%2)return;var s=p.r*3,x2=((p.x*VW+Math.sin(t*.7+k)*40)%VW+VW)%VW,y2=((p.y*VH-t*p.v*.6)%VH+VH)%VH,a=.25+.6*Math.abs(Math.sin(t*3+p.r*7));X.fillStyle='rgba(255,255,255,'+a+')';X.beginPath();path([[x2,y2-s],[x2+s*.3,y2-s*.3],[x2+s,y2],[x2+s*.3,y2+s*.3],[x2,y2+s],[x2-s*.3,y2+s*.3],[x2-s,y2],[x2-s*.3,y2-s*.3]]);X.closePath();X.fill()})}
+function trans(st,d2){var q=1-Math.abs(d2)/.3;
+ if(st=='wipe'){var p=(d2+.3)/.6;p=p*p*(3-2*p);var x0=-VW+2*VW*p;Q(x0,0,VW,VH,R);Q(p<.5?x0+VW-10:x0,0,10,VH,W)}
+ else if(st=='flash'){X.fillStyle='rgba(255,255,255,'+(q*q)+')';X.fillRect(0,0,VW,VH)}
+ else if(st=='iris'){X.fillStyle=R;X.beginPath();X.arc(VW/2,VH/2,Math.hypot(VW,VH)/2*q*1.05,0,7);X.fill();X.strokeStyle=W;X.lineWidth=10;X.stroke()}
+ else if(st=='bars'){for(var j=0;j<6;j++){var ph=cl(q*1.6-j*.12),h=VH*ph;Q(j*VW/6,d2<0?0:VH-h,VW/6+1,h,j%2?R:'#1a1b21')}}
+ else{X.fillStyle='rgba(0,0,0,'+(q*.45)+')';X.fillRect(0,0,VW,VH);for(var j=0;j<14;j++){var rr=Math.sin(j*12.9+d2*40)*43758.5,rv=rr-Math.floor(rr),y_=rv*VH,h_=20+rv*90,off=(rv-.5)*160*q;X.fillStyle=j%3==0?'rgba(229,57,53,.55)':j%3==1?'rgba(255,255,255,.35)':'rgba(0,200,255,.35)';X.fillRect(off,y_,VW,h_)}}}
+function dly(){var v=parseFloat($('vdelay').value);return isNaN(v)?1:Math.max(0,Math.min(5,v))}
+function mdly(){var v=parseFloat($('vmdelay').value);return isNaN(v)?1.5:Math.max(0,Math.min(5,v))}
+function mdOf(i){var d=Math.max(2,+slides[i].dur||5);return MT?Math.min(mdly(),Math.max(0,d-1.2)):0}
+function sstart(i){var a=0;for(var k=0;k<i;k++)a+=Math.max(2,+slides[k].dur||5);return a}
+function montageFrame(tt,vert){var n=slides.length,s0=0,i=0;for(;i<n-1;i++){var dd=Math.max(2,+slides[i].dur||5);if(tt<s0+dd)break;s0+=dd}
+ var sl=slides[i],d=Math.max(2,+sl.dur||5),u=tt-s0,MD=mdOf(i),vq=(sl.ve&&sl.ve.readyState>=2)?sl.ve:sl.pv,src=null,sw=0,sh=0,mg=$('vmagic').checked,rv=E((u-MD)/.7);
+ if(vq&&vq.readyState>=2&&vq.videoWidth){src=vq;sw=vq.videoWidth;sh=vq.videoHeight}else if(sl.img){src=sl.img;sw=sl.img.width;sh=sl.img.height}
+ if(rv<1)bgd(tt);
+ if(rv>0){X.save();var vh=VH*rv;X.beginPath();X.rect(0,(VH-vh)/2,VW,vh);X.clip();
+  if(src){var uu=Math.max(0,u-MD),kb=src==vq?1:(i%2?1.12-.1*uu/d:1+.1*uu/d),r=Math.max(VW/sw,VH/sh)*kb,w=sw*r,h=sh*r,px=(src!=vq&&i%3==2)?(uu/d-.5)*60:0;X.drawImage(src,(VW-w)/2+px,(VH-h)/2,w,h)}else{Q(0,0,VW,VH,'#15161b');sym(VW/2-70,VH/2-110,140);T('ADD IMAGE OR VIDEO',VW/2,VH/2+80,34,G,'center')}
+  X.restore();if(rv<1){Q(0,(VH-vh)/2-3,VW,6,W);Q(0,(VH+vh)/2-3,VW,6,R)}}
+ var g=X.createLinearGradient(0,0,0,VH*.35);g.addColorStop(0,'rgba(0,0,0,.7)');g.addColorStop(1,'rgba(0,0,0,0)');X.fillStyle=g;X.fillRect(0,0,VW,VH*.35);
+ if(mg)magic(tt);
+ var ttl=(sl.title||'').trim(),tx=(sl.text||'').trim(),bx=400,bw=VW-bx-(vert?40:60),by=60,pin=E((u-.15)/.5),po=E((u-(d-.35))/.35),a=pin*(1-po);
+ if(ttl||tx){X.globalAlpha=a;X.save();X.translate(0,-40*(1-pin));var yy=by;
+  if(ttl){F(26);var lw=Math.min(bw,X.measureText(ttl.toUpperCase()).width+50);if(mg){X.shadowColor='rgba(229,57,53,.9)';X.shadowBlur=18+10*Math.sin(tt*4)}Q(bx,yy,lw,42,R);X.shadowBlur=0;T(ttl.toUpperCase(),bx+lw/2,yy+21,26,W,'center',bw-30);yy+=42}
+  if(tx){var ft=fit2(tx,bw-60,vert?150:110,vert?36:40,22,500),lh=ft.s*1.22,bh=Math.max(64,ft.L.length*lh+24),cnt=Math.floor(tx.length*E((u-.35)/1.1)+1);Q(bx,yy,bw,bh,'#fff');Q(bx,yy,12,bh,R);var sofar=0;ft.L.forEach(function(l,k){var part=l.slice(0,Math.max(0,cnt-sofar));sofar+=l.length+1;if(part)T(part,bx+34,yy+12+k*lh+lh/2,ft.s,K,'left',0,500)})}
+  X.restore();X.globalAlpha=1}
+ var b=0,styles=['wipe','flash','iris','bars','glitch'],tr=$('vtr').value||'Mix',mp={'Red wipe':'wipe','Flash':'flash','Iris circle':'iris','Bars':'bars','Glitch':'glitch'};
+ for(var k=1;k<n;k++){b+=Math.max(2,+slides[k-1].dur||5);var d2=tt-b;if(d2>=-.3&&d2<=.3)trans(tr=='Mix'?styles[(k-1)%5]:(mp[tr]||'wipe'),d2)}
+ chrome(tt,vert)}
 function frame(t){X=VX;X.setTransform(SC,0,0,SC,0,0);var vert=VP!='youtube',tot=total();bgd(t);
- if(t<IN())intro(t,vert);else if(t>=IN()+stot())closer(t-IN()-stot(),vert);else{
+ if(t<IN())intro(t,vert);else if(t>=IN()+stot())closer(t-IN()-stot(),vert);else if(VM=='list')listFrame(t-IN(),vert);else if(MT)montageFrame(t-IN(),vert);else{
   var tt=t-IN(),n=slides.length,s0=0,i=0;for(;i<n-1;i++){var dd=Math.max(2,+slides[i].dur||5);if(tt<s0+dd)break;s0+=dd}
   var sl=slides[i],d=Math.max(2,+sl.dur||5),u=tt-s0,ee=E((u-(d-.6))/.6);
-  var ix=vert?60:960,iy=190,iw=vert?960:880,ih=vert?860:740,yy=iy-(iy+ih+60)*(1-EB(u/.9))-(iy+ih+60)*ee;
+  var ix=vert?60:960,iy=vert?830:190,iw=vert?960:880,ih=vert?890:740,yy=vert?iy+(VH-iy)*(1-EB(u/.9))+(VH-iy)*ee:iy-(iy+ih+60)*(1-EB(u/.9))-(iy+ih+60)*ee;
   X.save();X.shadowColor='rgba(0,0,0,.65)';X.shadowBlur=40;X.fillStyle=S;rr(ix,yy,iw,ih,24);X.fill();X.restore();
-  X.save();rr(ix,yy,iw,ih,24);X.clip();if(sl.img){var z=1+.05*u/d,r=Math.max(iw/sl.img.width,ih/sl.img.height)*z,w=sl.img.width*r,h=sl.img.height*r;X.drawImage(sl.img,ix+(iw-w)/2,yy+(ih-h)/2,w,h)}else{sym(ix+iw/2-70,yy+ih/2-110,140);T('ADD IMAGE',ix+iw/2,yy+ih/2+80,34,G,'center')}
+  X.save();rr(ix,yy,iw,ih,24);X.clip();var vq=(sl.ve&&sl.ve.readyState>=2)?sl.ve:sl.pv;if(vq&&vq.readyState>=2&&vq.videoWidth){var rq=Math.max(iw/vq.videoWidth,ih/vq.videoHeight),wq=vq.videoWidth*rq,hq=vq.videoHeight*rq;X.drawImage(vq,ix+(iw-wq)/2,yy+(ih-hq)/2,wq,hq)}else if(sl.img){var z=1+.05*u/d,r=Math.max(iw/sl.img.width,ih/sl.img.height)*z,w=sl.img.width*r,h=sl.img.height*r;X.drawImage(sl.img,ix+(iw-w)/2,yy+(ih-h)/2,w,h)}else{sym(ix+iw/2-70,yy+ih/2-110,140);T('ADD IMAGE',ix+iw/2,yy+ih/2+80,34,G,'center')}
   var sh=X.createLinearGradient(0,yy+ih*.6,0,yy+ih);sh.addColorStop(0,'rgba(0,0,0,0)');sh.addColorStop(1,'rgba(0,0,0,.5)');X.fillStyle=sh;X.fillRect(ix,yy,iw,ih);X.restore();
   X.strokeStyle=R;X.lineWidth=6;rr(ix,yy,iw,ih,24);X.stroke();Q(ix+30,yy+ih-14,200,14,R);
-  var tx=vert?60:80,ty=vert?1100:190,tw_=vert?960:800,th=vert?640:740,p0=E((u-.95)/.6),a0=p0*(1-ee);
-  if(a0>0){X.globalAlpha=a0;X.save();X.translate(vert?0:-80*(1-p0),vert?60*(1-p0):0);var tg=($('vtag').value||'PULSE NEWS').toUpperCase();F(30);var tgw=Math.max(250,X.measureText(tg).width+60);Q(tx,ty,tgw,56,R);T(tg,tx+tgw/2,ty+28,30,W,'center');Q(tx,ty+56,tw_,th-56,S);Q(tx,ty+56,14,th-56,R);
+  var tx=vert?60:80,ty=190,tw_=vert?960:800,th=vert?600:740,DL2=Math.max(.95,dly()),p0=E((u-DL2)/.6),a0=p0*(1-ee);
+  if(a0>0){X.globalAlpha=a0;X.save();X.translate(vert?0:-80*(1-p0),vert?-60*(1-p0):0);var tg=($('vtag').value||'PULSE NEWS').toUpperCase();F(30);var tgw=Math.max(250,X.measureText(tg).width+60);Q(tx,ty,tgw,56,R);T(tg,tx+tgw/2,ty+28,30,W,'center');Q(tx,ty+56,tw_,th-56,S);Q(tx,ty+56,14,th-56,R);
    var iw2=tw_-90,ih2=th-56-60,ttl=(sl.title||'').trim(),y0=ty+56+30,hT=0,k0=0;
-   if(ttl){var ft=fit2(ttl.toUpperCase(),iw2,ih2*.45,vert?58:56,30,800),lh=ft.s*1.2;hT=ft.L.length*lh+22;ft.L.forEach(function(l,k){var a=E((u-1.05-k*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+k*lh+lh/2+14*(1-a),ft.s,W,'left',0,800)});k0=ft.L.length}
+   if(ttl){var ft=fit2(ttl.toUpperCase(),iw2,ih2*.45,vert?58:56,30,800),lh=ft.s*1.2;hT=ft.L.length*lh+22;ft.L.forEach(function(l,k){var a=E((u-(DL2+.1)-k*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+k*lh+lh/2+14*(1-a),ft.s,W,'left',0,800)});k0=ft.L.length}
    var fb=fit2(sl.text||'',iw2,ih2-hT,ttl?(vert?44:42):(vert?56:54),24,500),lb=fb.s*1.25;
-   fb.L.forEach(function(l,k){var a=E((u-1.05-(k0+k)*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+hT+k*lb+lb/2+14*(1-a),fb.s,ttl?'#E8E8EA':W,'left',0,500)});
+   fb.L.forEach(function(l,k){var a=E((u-(DL2+.1)-(k0+k)*.12)/.5)*(1-ee);X.globalAlpha=a;T(l,tx+50,y0+hT+k*lb+lb/2+14*(1-a),fb.s,ttl?'#E8E8EA':W,'left',0,500)});
    X.restore();X.globalAlpha=1}
   var lab=($('vlab').value||'NEWS').toUpperCase(),ls=$('vtk').value.split('\n').map(function(x){return x.trim()}).filter(Boolean),tk=(ls.length?ls.join('   •   '):'ARENA PULSE')+'   •   ';
   var ky=vert?1760:960;F(26);var lw=X.measureText(lab).width+70;if(tk!=tkT){tkT=tk;F(30,500);tkW=X.measureText(tk).width}
@@ -229,29 +326,39 @@ function sched(ac,dst,b){
  function tone(f0,f1,t,d,p,ty){var o=ac.createOscillator(),g=ac.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(p,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(dst);o.start(t);o.stop(t+d+.05)}
  function noise(t,d,f0,f1,p){var n=Math.ceil(ac.sampleRate*d),bf=ac.createBuffer(1,n,ac.sampleRate),a=bf.getChannelData(0);for(var i=0;i<n;i++)a[i]=Math.random()*2-1;var s=ac.createBufferSource();s.buffer=bf;var f=ac.createBiquadFilter();f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);var g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(p,t+d*.4);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(dst);s.start(t)}
  if(IN()){tone(70,40,b+.15,.3,.9);tone(60,35,b+.3,.3,.7);tone(300,1000,b+.4,.18,.25);tone(55,30,b+1,.5,.9);noise(b+.95,.15,2500,2500,.5);tone(1760,1760,b+1.6,.7,.08,'triangle')}
- var s0=0;slides.forEach(function(s){var d=Math.max(2,+s.dur||5),t=b+IN()+s0;noise(t-.05,.5,300,3500,.6);tone(60,38,t+.8,.35,.9);noise(t+.78,.1,2000,2000,.4);tone(1320,1320,t+.98,.3,.12,'triangle');for(var k=0;k<3;k++)tone(1760+k*220,1760+k*220,t+1.08+k*.14,.1,.06,'triangle');noise(t+d-.6,.4,3000,300,.4);s0+=d});if(OUT()){var c=b+IN()+s0;tone(300,1000,c+.2,.18,.25);tone(1320,1320,c+.6,.3,.12,'triangle');noise(c+.95,.5,300,3500,.6);tone(60,38,c+1.25,.4,.9);noise(c+1.23,.1,2000,2000,.4);[1320,1760,1980].forEach(function(f,k){tone(f,f,c+1.8+k*.4,.35,.12,'triangle')});tone(1760,1760,c+3,.7,.08,'triangle')}}
-function audio(forRec){var hs=slides.some(function(x){return x.sbuf});if(!$('vsnd').checked&&!hs)return null;
+ var s0=0;if(VM=='list'){var pgs=lplan();pgs.forEach(function(pg){var t=b+IN()+pg.s;noise(t-.05,.5,300,3500,.5);pg.r.forEach(function(r,k){tone(1200+k*140,1200+k*140,t+.6+k*.35,.12,.1,'triangle');tone(70,45,t+.6+k*.35,.2,.35)});noise(t+pg.d-.5,.4,3000,300,.35)});s0=ltot()}else slides.forEach(function(s){var d=Math.max(2,+s.dur||5),t=b+IN()+s0;if(MT){var md=Math.min(mdly(),Math.max(0,d-1.2));noise(t-.15,.4,400,3000,.4);tone(2200,2800,t+.3,.18,.06,'triangle');noise(t+md-.1,.5,300,3500,.6);tone(60,38,t+md+.35,.3,.8);tone(2800,3300,t+md+.5,.18,.05,'triangle')}else{noise(t-.05,.5,300,3500,.6);tone(60,38,t+.8,.35,.9);noise(t+.78,.1,2000,2000,.4);tone(1320,1320,t+.98,.3,.12,'triangle');for(var k=0;k<3;k++)tone(1760+k*220,1760+k*220,t+1.08+k*.14,.1,.06,'triangle');noise(t+d-.6,.4,3000,300,.4)}s0+=d});if(OUT()){var c=b+IN()+s0;tone(300,1000,c+.2,.18,.25);tone(1320,1320,c+.6,.3,.12,'triangle');noise(c+.95,.5,300,3500,.6);tone(60,38,c+1.25,.4,.9);noise(c+1.23,.1,2000,2000,.4);[1320,1760,1980].forEach(function(f,k){tone(f,f,c+1.8+k*.4,.35,.12,'triangle')});tone(1760,1760,c+3,.7,.08,'triangle')}}
+function audio(forRec){var hs=VM=='news'&&slides.some(function(x){return x.sbuf||x.vurl});if(!$('vsnd').checked&&!hs)return null;
  try{var ac=new (window.AudioContext||window.webkitAudioContext)(),m=ac.createGain();m.gain.value=.8;var de=null;if(forRec){de=ac.createMediaStreamDestination();m.connect(de)}else m.connect(ac.destination);ac.resume();var b0=ac.currentTime+.15;
   if($('vsnd').checked)sched(ac,m,b0);var s0=0;
-  slides.forEach(function(x){var d=Math.max(2,+x.dur||5),st=b0+IN()+s0;if(x.sbuf){var so=ac.createBufferSource(),g=ac.createGain();so.buffer=x.sbuf;g.gain.setValueAtTime(1,st+d-.3);g.gain.linearRampToValueAtTime(0,st+d);so.connect(g);g.connect(m);so.start(st);so.stop(st+d)}s0+=d});
-  return{ac:ac,track:de?de.stream.getAudioTracks()[0]:null}}catch(e){return null}}
+  if(VM=='news')slides.forEach(function(x){var d=Math.max(2,+x.dur||5),st=b0+IN()+s0;if(x.sbuf){var so=ac.createBufferSource(),g=ac.createGain();so.buffer=x.sbuf;g.gain.setValueAtTime(1,st+d-.3);g.gain.linearRampToValueAtTime(0,st+d);so.connect(g);g.connect(m);so.start(st);so.stop(st+d)}s0+=d});
+  return{ac:ac,master:m,track:de?de.stream.getAudioTracks()[0]:null}}catch(e){return null}}
 function vnote(s){$('vn').textContent=s}
 function buildPl(){$('vpl').innerHTML='';PL.forEach(function(p){var b=document.createElement('button');b.textContent=p[1];b.className=p[0]==VP?'on':'g';b.onclick=function(){VP=p[0];$('vcl').value=VP=='youtube'?'SUBSCRIBE':'FOLLOW';buildPl();vsize()};$('vpl').appendChild(b)})}
 function buildSl(){var h=$('vsl');h.innerHTML='';slides.forEach(function(s,i){var c=document.createElement('div');c.className='card';
- c.innerHTML='<div class="row"><img class="th" alt=""><div><label>SLIDE '+(i+1)+' TITLE (bold)</label><input type="text" class="ti" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><label>MAIN TEXT</label><textarea rows="3"></textarea></div></div><div class="row" style="margin-top:8px"><div><label>IMAGE</label><input type="file" accept="image/*"></div><div><label>SECONDS</label><input type="number" min="2" max="20"></div></div><div style="margin-top:8px"><label>SOUND FOR THIS SLIDE (optional)</label><input type="file" accept="audio/*" class="sf"><div class="bt"><button class="g ms">Match seconds to sound</button><button class="g rs">Remove sound</button></div><div class="n sn"></div></div><div class="bt"><button class="g u">Up</button><button class="g dn">Down</button><button class="g de">Delete</button></div>';
+ c.innerHTML='<div class="row"><img class="th" alt=""><div><label>SLIDE '+(i+1)+' TITLE (bold)</label><input type="text" class="ti" style="width:100%;box-sizing:border-box;background:var(--s);color:var(--w);border:1px solid #3a3b42;border-radius:8px;padding:10px;font:inherit;font-size:15px;margin:4px 0 8px"><label>MAIN TEXT</label><textarea rows="3"></textarea></div></div><div class="row" style="margin-top:8px"><div><label>IMAGE OR VIDEO CLIP</label><input type="file" accept="image/*,video/*"><div class="n mi"></div></div><div><label>SECONDS</label><input type="number" min="2" max="120"></div></div><div style="margin-top:8px"><label>SOUND FOR THIS SLIDE (optional)</label><input type="file" accept="audio/*" class="sf"><div class="bt"><button class="g ms">Match seconds to sound</button><button class="g rs">Remove sound</button></div><div class="n sn"></div></div><div class="bt"><button class="g u">Up</button><button class="g dn">Down</button><button class="g de">Delete</button></div>';
  var th=c.querySelector('.th');if(s.url)th.src=s.url;var ti=c.querySelector('.ti');ti.value=s.title||'';ti.oninput=function(){s.title=ti.value;frame(vcur*total())};var ta=c.querySelector('textarea');ta.value=s.text;ta.oninput=function(){s.text=ta.value;frame(vcur*total())};
  var nm=c.querySelector('input[type=number]');nm.value=s.dur;nm.oninput=function(){s.dur=+nm.value||5};
- c.querySelector('input[type=file]').onchange=function(e){var f=e.target.files[0];if(!f)return;var u=URL.createObjectURL(f),im=new Image();im.onload=function(){s.img=im;s.url=u;th.src=u;frame(vcur*total())};im.src=u};
+ var mi=c.querySelector('.mi');if(s.vurl)mi.textContent='Video clip loaded.';
+ c.querySelector('input[type=file]').onchange=function(e){var f=e.target.files[0];if(!f)return;var u=URL.createObjectURL(f);
+  if(f.type.indexOf('video/')==0){var pv=document.createElement('video');pv.muted=true;pv.playsInline=true;pv.preload='auto';pv.onloadedmetadata=function(){if(isFinite(pv.duration)){s.dur=Math.min(120,Math.max(2,Math.ceil(pv.duration)+(MT?Math.ceil(mdly()):0)));nm.value=s.dur}try{pv.currentTime=.05}catch(x){}};pv.onseeked=function(){if(!play)frame(vcur*total())};pv.src=u;s.pv=pv;s.vurl=u;s.img=null;s.url='';th.removeAttribute('src');mi.textContent='Video clip loaded. Seconds set to the clip length.'}
+  else{var im=new Image();im.onload=function(){s.img=im;s.url=u;s.pv=null;s.vurl='';th.src=u;mi.textContent='';frame(vcur*total())};im.src=u}};
  var sn=c.querySelector('.sn');if(s.sbuf)sn.textContent='Sound: '+s.sbuf.duration.toFixed(1)+' s';
  c.querySelector('.sf').onchange=function(e){var f=e.target.files[0];if(!f)return;sn.textContent='Reading sound...';var fr=new FileReader();fr.onload=function(){try{DCx=DCx||new (window.AudioContext||window.webkitAudioContext)();DCx.decodeAudioData(fr.result,function(b){s.sbuf=b;sn.textContent='Sound: '+b.duration.toFixed(1)+' s'},function(){sn.textContent='Could not read this sound file.'})}catch(x){sn.textContent='Could not read this sound file.'}};fr.readAsArrayBuffer(f)};
  c.querySelector('.ms').onclick=function(){if(s.sbuf){s.dur=Math.min(20,Math.max(2,Math.ceil(s.sbuf.duration)));nm.value=s.dur}};c.querySelector('.rs').onclick=function(){s.sbuf=null;sn.textContent='';c.querySelector('.sf').value=''};
  c.querySelector('.u').onclick=function(){if(i){slides.splice(i-1,0,slides.splice(i,1)[0]);buildSl()}};c.querySelector('.dn').onclick=function(){if(i<slides.length-1){slides.splice(i+1,0,slides.splice(i,1)[0]);buildSl()}};
  c.querySelector('.de').onclick=function(){if(slides.length>1){slides.splice(i,1);buildSl()}else vnote('Keep at least one slide.')};h.appendChild(c)})}
-$('vadd').onclick=function(){slides.push({img:null,url:'',title:'NEW HEADLINE',text:'Write the main text here.',dur:5});buildSl()};
-function vstop(){play=0;cancelAnimationFrame(raf);$('vpp').textContent='Play preview';if(curAu){try{curAu.ac.close()}catch(e){}curAu=null}}
-function vrun(done){var t0=performance.now()+150,tot=total();play=1;(function loop(){var t=Math.max(0,(performance.now()-t0)/1000);vcur=Math.min(1,t/tot);$('vsk').value=Math.round(vcur*1000);frame(Math.min(t,tot));if(!play)return;if(t<tot)raf=requestAnimationFrame(loop);else{play=0;$('vpp').textContent='Play preview';done&&done()}})()}
-$('vpp').onclick=function(){if(play){vstop();return}$('vpp').textContent='Stop';ready().then(function(){curAu=audio(false);vrun(function(){if(curAu){setTimeout(function(){vstop()},800)}})})};
-$('vsk').oninput=function(){vstop();vcur=$('vsk').value/1000;frame(vcur*total())};
+$('vadd').onclick=function(){slides.push({img:null,url:'',title:MT?'':'NEW HEADLINE',text:MT?'':'Write the main text here.',dur:MT?3:5});buildSl()};
+function vstop(){play=0;cancelAnimationFrame(raf);$('vpp').textContent='Play preview';if(curAu){try{curAu.ac.close()}catch(e){}curAu=null}vclean()}
+function vidx(t){if(VM!='news')return -1;var a=t-IN();if(a<0||a>=stot())return -1;var s0=0;for(var i=0;i<slides.length;i++){var d=Math.max(2,+slides[i].dur||5);if(a<s0+d)return i;s0+=d}return -1}
+var lastAi=-1;
+function vclean(){slides.forEach(function(x){if(x.ve){try{x.ve.pause()}catch(e){}x.ve=null}});lastAi=-1}
+function vsync(t){var ai=vidx(t);if(ai!=lastAi){if(lastAi>=0&&slides[lastAi]&&slides[lastAi].ve){try{slides[lastAi].ve.pause()}catch(e){}}lastAi=ai;if(ai>=0)slides[ai].st=0}
+ if(ai>=0&&slides[ai].ve&&!slides[ai].st&&t-IN()-sstart(ai)>=mdOf(ai)){slides[ai].st=1;var v=slides[ai].ve;try{v.currentTime=0;var pr=v.play();if(pr&&pr.catch)pr.catch(function(){})}catch(e){}}}
+function vseek(t){var i=vidx(t);if(i>=0&&slides[i].pv){var s0=0;for(var k=0;k<i;k++)s0+=Math.max(2,+slides[k].dur||5);try{slides[i].pv.currentTime=Math.max(0,t-IN()-s0-mdOf(i))}catch(e){}}}
+function prepRun(au){slides.forEach(function(x){x.ve=null;if(x.vurl){var v=document.createElement('video');v.playsInline=true;v.preload='auto';v.src=x.vurl;if(au&&au.ac&&au.master){try{au.ac.createMediaElementSource(v).connect(au.master)}catch(e){}}x.ve=v}})}
+function vrun(done,au){prepRun(au);lastAi=-1;var t0=performance.now()+150,tot=total();play=1;(function loop(){var t=Math.max(0,(performance.now()-t0)/1000);vcur=Math.min(1,t/tot);$('vsk').value=Math.round(vcur*1000);vsync(t);frame(Math.min(t,tot));if(!play){vclean();return}if(t<tot)raf=requestAnimationFrame(loop);else{play=0;vclean();$('vpp').textContent='Play preview';done&&done()}})()}
+$('vpp').onclick=function(){if(play){vstop();return}$('vpp').textContent='Stop';ready().then(function(){curAu=audio(false);vrun(function(){if(curAu){setTimeout(function(){vstop()},800)}},curAu)})};
+$('vsk').oninput=function(){vstop();vcur=$('vsk').value/1000;vseek(vcur*total());frame(vcur*total())};
 $('vtk').oninput=$('vlab').oninput=$('vcl').oninput=$('vtag').oninput=function(){frame(vcur*total())};$('vin').onchange=$('vout').onchange=function(){vsize()};
 $('vsv').onclick=function(){if(!vout)return;function plain(){var a=document.createElement('a');a.href=URL.createObjectURL(vout.b);a.download=vout.n;document.body.appendChild(a);a.click();a.remove();vnote('Saved to your Downloads.')}
  if(!DL){plain();return}DL.save({filename:vout.n,data:vout.b}).then(function(){vnote('Saved.')}).catch(function(e){if(e&&e.code=='declined')vnote('Not saved.');else plain()})};
@@ -260,10 +367,77 @@ $('vgen').onclick=function(){if(!window.MediaRecorder){vnote('Video recording is
  vstop();$('vv').hidden=$('vsv').hidden=true;$('vgen').disabled=true;vnote('Generating... keep this screen open until it finishes.');
  ready().then(function(){var au=audio(true),st=VC.captureStream(30);if(au&&au.track)st.addTrack(au.track);var ch=[],r=new MediaRecorder(st,{mimeType:mt,videoBitsPerSecond:4000000});r.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data)};
   r.onstop=function(){var y=mt.split(';')[0],b=new Blob(ch,{type:y});vout={b:b,n:'arena-pulse-'+VP+'.'+(y.indexOf('mp4')>0?'mp4':'webm')};$('vv').src=URL.createObjectURL(b);$('vv').hidden=false;$('vsv').hidden=false;$('vgen').disabled=false;vnote('Done. Tap Save video.');if(au)try{au.ac.close()}catch(e){}};
-  r.start();vrun(function(){r.stop()})})};
-$('tp').onclick=function(){document.body.classList.remove('wide');$('sp').hidden=false;$('sv2').hidden=true;$('tp').className='';$('tv').className='g'};
-$('tv').onclick=function(){document.body.classList.add('wide');$('sp').hidden=true;$('sv2').hidden=false;$('tv').className='';$('tp').className='g';vsize()};
+  r.start();vrun(function(){r.stop()},au)})};
+function showTab(n){['p','v','l'].forEach(function(k){$('t'+k).className=k==n?'':'g'});$('sp').hidden=n!='p';$('sv2').hidden=n!='v';$('sl2').hidden=n!='l';document.body.classList.toggle('wide',n=='v');if(n=='v')vsize();if(n=='l')buildLib()}
+$('tp').onclick=function(){showTab('p')};$('tl').onclick=function(){showTab('l')};
+$('tv').onclick=function(){showTab('v')};
+var LD={match:['MATCH DAY','TUESDAY 3 NOVEMBER','One match per line: TIME|HOME|AWAY|COMPETITION','6:45 PM|Shakhtar Donetsk|Sporting CP|Champions League\n6:45 PM|Galatasaray|VfB Stuttgart|Champions League\n9:00 PM|Atletico Madrid|Bayern Munich|Champions League\n9:00 PM|Barcelona|Aston Villa|Champions League\n9:00 PM|Villarreal|Paris Saint-Germain|Champions League'],
+ results:['FULL TIME','TUESDAY 3 NOVEMBER','One result per line: Team 3-0 Team|COMPETITION (optional)','Villarreal 0-6 Paris Saint-Germain|Champions League\nAtletico Madrid 0-2 Bayern Munich|Champions League\nBarcelona 3-0 Aston Villa|Champions League\nManchester United 3-2 AS Roma|Champions League\nFeyenoord 0-3 Inter|Champions League\nLASK 4-0 Slovan Bratislava|Champions League'],
+ lineups:['FULHAM V NEWCASTLE UNITED','4-2-3-1 | 4-3-3','One line per number: HOME NUMBER NAME | AWAY NUMBER NAME','1 Goalkeeper | 1 Goalkeeper\n2 Player | 2 Player\n3 Player | 3 Player\n4 Player | 4 Player\n5 Player | 5 Player\n6 Player | 6 Player\n7 Player | 7 Player\n8 Player | 8 Player\n9 Player | 9 Player\n10 Player | 10 Player\n11 Player | 11 Player'],
+ top5:['TOP 5 [TOPIC]','[SEASON OR COMPETITION]','One per line: NAME OR CLUB | STAT (rank 1 first)','Player one|00 goals\nPlayer two|00 goals\nPlayer three|00 goals\nPlayer four|00 goals\nPlayer five|00 goals'],
+ score:['FULL TIME','CHAMPIONS LEAGUE','One match per line: Home 3-0 Away | COMPETITION | home scorers (commas) | away scorers (commas)','Barcelona 3-0 Aston Villa|Champions League|Scorer one 12\', Scorer two 55\', Scorer three 80\'|'],
+ facts:['PULSE FACTS','ARENA PULSE','One fact per line: BIG NUMBER | TITLE | ONE LINE','7.24 M|NBA THREE-POINT LINE|23 ft 9 in from the basket at the top of the arc.\n9|CHAMPIONS LEAGUE MATCHES TODAY|Two at 6:45 PM and seven at 9:00 PM CET.'],
+ standings:['CHAMPIONS LEAGUE STANDINGS','AFTER MATCHDAY 3','One team per line: Team W D L Pts','Paris Saint-Germain 3 0 0 9\nAston Villa 3 0 0 9\nLiverpool 3 0 0 9\nReal Madrid 3 0 0 9\nReal Betis 3 0 0 9\nVfB Stuttgart 2 1 0 7\nArsenal 2 1 0 7']};
+function setMode(m){vstop();VM=(m=='news'||m=='montage')?'news':'list';MT=m=='montage'?1:0;$('vnews').hidden=VM=='list';$('vlist').hidden=VM=='news';if(VM=='list'){LK=m;var d=LD[m];$('lti').value=d[0];$('ldt').value=d[1];$('lhint').textContent=d[2].toUpperCase();$('lrows').value=d[3];$('vbuild').innerHTML='';var bk=({match:'match',results:'results',score:'results',standings:'standings'})[m];if(bk)$('vbuild').appendChild(builder(bk,$('lrows')))}vcur=0;$('vsk').value=0;vsize()}
+$('vmode').onchange=function(){setMode($('vmode').value)};
+$('lti').oninput=$('ldt').oninput=$('lrows').oninput=$('vhold').oninput=$('vtkon').onchange=function(){frame(vcur*total())};
+$('lti').value=LD.match[0];$('ldt').value=LD.match[1];$('lrows').value=LD.match[3];
+
+
+var DEFC={'Premier League':'Arsenal~Arsenal FC;Manchester City~Man City;Brighton~Brighton & Hove Albion;Chelsea~Chelsea FC;Everton~Everton FC;Liverpool~Liverpool FC;Brentford~Brentford FC;Leeds United~Leeds;Bournemouth~AFC Bournemouth;Tottenham~Tottenham Hotspur,Spurs;Newcastle United~Newcastle;Aston Villa;Hull City~Hull;Ipswich Town~Ipswich;Fulham~Fulham FC;Nottingham Forest~Forest;Coventry City~Coventry;Manchester United~Man United,Man Utd;Crystal Palace;Sunderland~Sunderland AFC',
+'La Liga':'Barcelona~FC Barcelona;Real Madrid;Atlético Madrid~Atletico Madrid,Atletico;Real Betis~Betis,Real Betis Seville;Real Sociedad~Real Sociedad San Sebastian;Sevilla~Sevilla FC;Athletic Club~Athletic Bilbao;Deportivo La Coruña~Deportivo,RC Deportivo de A Coruna;Racing Santander;Alavés~Alaves,Deportivo Alaves;Villarreal~Villarreal CF;Celta Vigo~Celta,RC Celta de Vigo;Espanyol~Espanyol Barcelona;Rayo Vallecano;Getafe~Getafe CF;Osasuna~CA Osasuna;Elche~Elche CF;Levante~Levante UD;Valencia~Valencia CF;Málaga~Malaga,Malaga CF',
+'Serie A':'Lazio~Lazio Rome;AS Roma~Roma;Inter~Inter Milan,Inter Milano;Como~Como 1907;AC Milan~Milan;Frosinone~Frosinone Calcio;Juventus~Juventus Turin,Juve;Bologna~Bologna FC;Cagliari~Cagliari Calcio;Napoli~SSC Napoli;Torino~Torino FC;Genoa~Genoa CFC;Atalanta~Atalanta BC;Lecce~US Lecce;Fiorentina~ACF Fiorentina;Parma~Parma Calcio;Sassuolo~Sassuolo Calcio;Monza~AC Monza;Venezia~Venezia FC;Udinese~Udinese Calcio',
+'Bundesliga':'Bayern Munich~Bayern,Bayern München;Borussia Dortmund~Dortmund;RB Leipzig~Leipzig;SC Freiburg~Freiburg;Werder Bremen~Bremen;Bayer Leverkusen~Leverkusen;Elversberg~SV 07 Elversberg;VfB Stuttgart~Stuttgart;Eintracht Frankfurt~Frankfurt;Hamburger SV~Hamburg;Mainz 05~Mainz,FSV Mainz;Paderborn~SC Paderborn 07;FC Augsburg~Augsburg;Hoffenheim~TSG Hoffenheim;1. FC Köln~Köln,Cologne,1. FC Cologne;Union Berlin;Schalke 04~Schalke;Borussia Mönchengladbach~Gladbach,Borussia Monchengladbach',
+'Ligue 1':'Paris Saint-Germain~PSG,Paris SG;Paris FC;Lille~Lille OSC,LOSC;Lyon~Olympique Lyon,Olympique Lyonnais;Rennes~Stade Rennais FC,Stade Rennais;Marseille~Olympique Marseille,Olympique de Marseille;Monaco~AS Monaco;Nice~OGC Nice;Lens~Racing Club De Lens,RC Lens;Toulouse~Toulouse FC;Brest~Stade Brest 29,Stade Brestois;Lorient~FC Lorient;Strasbourg~Strasbourg Alsace,RC Strasbourg;Auxerre~AJ Auxerre;Angers~Angers SCO;Troyes~ESTAC Troyes;Le Mans~Le Mans FC;Le Havre~Le Havre AC',
+'Europe':'Club Brugge;Sporting CP~Sporting;Shakhtar Donetsk~Shakhtar;PSV Eindhoven~PSV;Galatasaray;LASK;Sabah;Feyenoord;Bodø/Glimt~Bodo/Glimt;AEK Athens~AEK;Fenerbahçe~Fenerbahce;Slavia Prague;Viking;Porto~FC Porto;Slovan Bratislava;Benfica~SL Benfica;Ajax~AFC Ajax;Celtic;Rangers;Olympiacos;Red Star Belgrade~Crvena Zvezda;Dinamo Zagreb;Salzburg~Red Bull Salzburg;Anderlecht;Beşiktaş~Besiktas'};
+var DEFM={'Top 5 leagues':'Premier League;La Liga~LaLiga;Serie A;Bundesliga;Ligue 1','European':'Champions League~UEFA Champions League;Europa League~UEFA Europa League;Conference League~UEFA Conference League;UEFA Super Cup','Cups':'FA Cup;Carabao Cup~League Cup,EFL Cup;Copa del Rey;Coppa Italia;DFB-Pokal;Coupe de France','International':'World Cup~FIFA World Cup;European Championship~UEFA European Championship,Euro;Copa America;Africa Cup of Nations~AFCON;Club World Cup~FIFA Club World Cup;Nations League~UEFA Nations League;World Cup Qualifiers','Africa':'CAF Champions League;CAF Confederation Cup;CAF Awards','Other leagues':'Saudi Pro League;MLS;Eredivisie;Primeira Liga;Scottish Premiership;Super Lig~Süper Lig'};
+function mergeDef(){if(LIB.v)return;[[DEFC,'clubs'],[DEFM,'comps']].forEach(function(p){Object.keys(p[0]).forEach(function(g){p[0][g].split(';').forEach(function(x){var q=x.split('~'),n=q[0].trim();if(!n)return;if(!LIB[p[1]].some(function(e){return lk(e.n)==lk(n)}))LIB[p[1]].push({n:n,a:q[1]?q[1].split(','):[],lg:g,d:'',u:''})})})});LIB.v=1;saveLib()}
+function fillDL(){['clubs','comps'].forEach(function(k){var d=document.getElementById('dl-'+k);if(!d)return;d.innerHTML='';LIB[k].forEach(function(e){var o=document.createElement('option');o.value=e.n;d.appendChild(o)})})}
+var LKIND='clubs';
+function libNote(x){$('ln').textContent=x}
+function shrink(file,cb){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var c=document.createElement('canvas'),m=Math.max(im.width,im.height),k=Math.min(1,200/m);c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/png'))};im.onerror=function(){libNote('Could not read this image.')};im.src=u}
+function fetchLogo(e,cb){if(!e.u){cb(false);return}fetch(e.u).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){shrink(b,function(d){e.d=d;saveLib();preloadLib();cb(true)})}).catch(function(){cb(false)})}
+function libRow(e,i,host){var d=document.createElement('div');d.className='card';d.innerHTML='<div class="row"><img class="th" style="width:64px;height:64px;object-fit:contain;background:#fff" alt=""><div><label>NAME</label><input type="text" class="rn" '+INPS+'><label>LOGO LINK (URL)</label><input type="text" class="ru" placeholder="https://..." '+INPS+'><div class="bt"><button class="g rl">Load logo</button><button class="g rd">Delete</button></div><label style="margin-top:8px">OR UPLOAD</label><input type="file" accept="image/*" class="rf"><div class="n rs"></div></div></div>';
+ var th=d.querySelector('.th'),rn=d.querySelector('.rn'),ru=d.querySelector('.ru'),rs=d.querySelector('.rs');if(e.d)th.src=e.d;rn.value=e.n;ru.value=e.u||'';rs.textContent=e.d?'Logo saved.':'No logo yet.';
+ rn.onchange=function(){e.n=rn.value.trim()||e.n;saveLib();preloadLib()};ru.onchange=function(){e.u=ru.value.trim();saveLib()};
+ d.querySelector('.rl').onclick=function(){e.u=ru.value.trim();rs.textContent='Loading...';fetchLogo(e,function(ok){if(ok){th.src=e.d;rs.textContent='Logo saved.'}else rs.textContent='Could not load this link. Save the image to your phone and use Upload instead.'})};
+ d.querySelector('.rf').onchange=function(ev){var f=ev.target.files[0];if(!f)return;shrink(f,function(u){e.d=u;th.src=u;saveLib();preloadLib();rs.textContent='Logo saved.'})};
+ d.querySelector('.rd').onclick=function(){var k=LIB[LKIND].indexOf(e);if(k>=0)LIB[LKIND].splice(k,1);saveLib();fillDL();buildLib()};host.appendChild(d)}
+function buildLib(){var arr=LIB[LKIND],q=lk($('lsr').value),sel=$('lgs'),cur=sel.value,gs={};arr.forEach(function(e){gs[e.lg||'Other']=1});sel.innerHTML='<option value="">All groups</option>'+Object.keys(gs).map(function(g){return '<option>'+g+'</option>'}).join('');sel.value=gs[cur]?cur:'';
+ var f=arr.filter(function(e){return(!sel.value||(e.lg||'Other')==sel.value)&&(!q||nm_(e).some(function(n){return n.indexOf(q)>=0}))}),h=$('lc');h.innerHTML='';f.slice(0,40).forEach(function(e){libRow(e,0,h)});
+ if(f.length>40){var p=document.createElement('p');p.className='n';p.textContent='Showing 40 of '+f.length+'. Use the search or the group to find more.';h.appendChild(p)}if(!f.length)h.innerHTML='<p class="n">Nothing found.</p>';
+ $('tabc').className=LKIND=='clubs'?'':'g';$('tabm').className=LKIND=='comps'?'':'g'}
+$('tabc').onclick=function(){LKIND='clubs';buildLib()};$('tabm').onclick=function(){LKIND='comps';buildLib()};$('lsr').oninput=$('lgs').onchange=buildLib;
+$('nca').onclick=function(){var n=$('ncn').value.trim(),f=$('ncf').files[0],u=$('ncu').value.trim();if(!n){libNote('Type a name first.');return}var e={n:n,a:[],lg:$('ncl').value.trim()||'Custom',d:'',u:u};LIB[LKIND].push(e);saveLib();fillDL();
+ function done(){$('ncn').value=$('ncu').value=$('ncl').value='';$('ncf').value='';buildLib();libNote('Added '+n+'.')}
+ if(f)shrink(f,function(d){e.d=d;saveLib();preloadLib();done()});else if(u)fetchLogo(e,function(ok){done();if(!ok)libNote('Added '+n+', but the logo link could not be loaded. Use Upload.')});else done()};
+$('lbb').onclick=function(){var L=$('lbulk').value.split('\n').map(function(x){return x.trim()}).filter(Boolean),ok=0,bad=0,left=L.length;if(!left){libNote('Paste some lines first.');return}libNote('Importing...');
+ L.forEach(function(l){var p=l.split('|'),n=(p[0]||'').trim(),u=(p[1]||'').trim(),kind='clubs',e=findEntry('clubs',n);if(!e){e=findEntry('comps',n);kind='comps'}if(!e){e={n:n,a:[],lg:'Custom',d:'',u:''};LIB.clubs.push(e)}e.u=u;fetchLogo(e,function(g){g?ok++:bad++;if(--left==0){saveLib();fillDL();buildLib();libNote(ok+' logos loaded, '+bad+' could not be loaded (use Upload for those).')}})})};
+function inp(v){var i=document.createElement('input');i.value=v||'';i.setAttribute('style',INPS);return i}
+function fillSel(sel,kind){var cur=sel.value;sel.innerHTML='<option value="">— pick from your list —</option>';var g={};LIB[kind].forEach(function(e){(g[e.lg||'Other']=g[e.lg||'Other']||[]).push(e.n)});Object.keys(g).forEach(function(k){var og=document.createElement('optgroup');og.label=k;g[k].slice().sort().forEach(function(n){var o=document.createElement('option');o.textContent=n;og.appendChild(o)});sel.appendChild(og)});sel.value=cur}
+function mkSel(kind){var s=document.createElement('select');fillSel(s,kind);s.onfocus=function(){fillSel(s,kind)};return s}
+function builder(kind,ta){var d=document.createElement('div');d.className='card';d.innerHTML='<label>ADD FROM YOUR CLUBS AND COMPETITIONS</label>';
+ function F(l,e){var w=document.createElement('div');w.innerHTML='<label>'+l+'</label>';w.appendChild(e);d.appendChild(w)}
+ var tm=inp('9:00 PM'),ho=mkSel('clubs'),aw=mkSel('clubs'),cp=mkSel('comps'),hs=inp('0'),as=inp('0'),w=inp('0'),dr=inp('0'),l=inp('0'),pt=inp('0');
+ if(kind=='match'){F('TIME',tm);F('HOME',ho);F('AWAY',aw);F('COMPETITION',cp)}else if(kind=='results'){F('HOME',ho);F('HOME SCORE',hs);F('AWAY SCORE',as);F('AWAY',aw);F('COMPETITION',cp)}else{F('CLUB',ho);F('WINS',w);F('DRAWS',dr);F('LOSSES',l);F('POINTS',pt)}
+ var b=document.createElement('button');b.textContent='Add line';b.onclick=function(){var ln='';if(!ho.value){return}
+  if(kind=='match'){if(!aw.value)return;ln=tm.value+'|'+ho.value+'|'+aw.value+'|'+cp.value}else if(kind=='results'){if(!aw.value)return;ln=ho.value+' '+hs.value+'-'+as.value+' '+aw.value+'|'+cp.value}else ln=ho.value+' '+w.value+' '+dr.value+' '+l.value+' '+pt.value;
+  ta.value=(ta.value.trim()?ta.value.trim()+'\n':'')+ln;ta.dispatchEvent(new Event('input'))};d.appendChild(b);return d}
+mergeDef();preloadLib();$('lti').setAttribute('list','dl-comps');
+
+var tv=document.createElement('video');tv.muted=true;tv.playsInline=true;tv.preload='auto';
+function seekPos(){var pe=document.getElementById('i_pos'),pc=pe?(+pe.value||0)/100:.1;if(tv.duration&&isFinite(tv.duration)){try{tv.currentTime=Math.min(tv.duration-.05,tv.duration*pc)}catch(e){}}}
+tv.onseeked=function(){if(sel.value=='Thumbnail from video')makeImage()};
+D['Thumbnail from video']={f:[['vf','Video file (any video from your phone)','','vfile'],['pos','Frame to use (0 to 100 percent of the video)','10','range'],['tag','Tag','NEW VIDEO'],['title','Big title','MATCH DAY: ALL THE RESULTS'],['sub','Small line','ARENA PULSE']],
+ d:function(v){C.width=1280;C.height=720;Q(0,0,1280,720,K);
+  if(tv.readyState>=2&&tv.videoWidth){var r=Math.max(1280/tv.videoWidth,720/tv.videoHeight),w=tv.videoWidth*r,h=tv.videoHeight*r;X.drawImage(tv,(1280-w)/2,(720-h)/2,w,h)}else T('CHOOSE A VIDEO FILE',640,360,40,G,'center');
+  var g=X.createLinearGradient(0,0,1280,0);g.addColorStop(0,'rgba(0,0,0,.82)');g.addColorStop(.65,'rgba(0,0,0,.25)');g.addColorStop(1,'rgba(0,0,0,0)');X.fillStyle=g;X.fillRect(0,0,1280,720);
+  var g2=X.createLinearGradient(0,380,0,720);g2.addColorStop(0,'rgba(0,0,0,0)');g2.addColorStop(1,'rgba(0,0,0,.7)');X.fillStyle=g2;X.fillRect(0,380,1280,340);
+  sym(50,36,80);T('ARENA PULSE',145,76,30,W);F(28);var w2=X.measureText(v.tag||'').width+48;Q(60,150,w2,56,R);T(v.tag||'',60+w2/2,178,28,W,'center');
+  var ft=fit2((v.title||'').toUpperCase(),760,330,100,44,800),lh=ft.s*1.15,y0=640-(v.sub?60:0)-ft.L.length*lh;Q(60,y0+4,12,ft.L.length*lh-8,R);ft.L.forEach(function(l,k){T(l,92,y0+k*lh+lh/2,ft.s,W,'left',0,800)});if(v.sub)T(v.sub.toUpperCase(),92,664,30,G,'left',1000,500)}};
+(function(){var o=document.createElement('option');o.textContent='Thumbnail from video';sel.appendChild(o)})();
 buildPl();buildSl();ready().then(function(){vsize()});
+build();
 
 if("serviceWorker" in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
 </script>
